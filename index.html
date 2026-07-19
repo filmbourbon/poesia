@@ -975,6 +975,265 @@ footer{
   #cordel-track .cp{width:min(300px,88vw);height:min(422px,calc(88vw*1.4))}
 }
 
+
+/* ══════════════════════════════════════════
+   CORDEL — SANFONA
+══════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+#cordel{
+  position:relative;
+  background:var(--K);
+  padding:80px 0;
+  overflow:visible;
+}
+
+/* ── ESTADO FECHADO ── */
+#cordel-fechado{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:24px;
+  cursor:pointer;
+  user-select:none;
+}
+#cordel-capa-card{
+  position:relative;
+  width:200px;
+  box-shadow:
+    2px 2px 0 1px rgba(0,0,0,.35),
+    5px 5px 0 1px rgba(0,0,0,.25),
+    9px 9px 0 1px rgba(0,0,0,.15),
+    0 24px 48px rgba(0,0,0,.6);
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+#cordel-capa-card:hover{
+  transform:translateY(-6px) rotate(-.5deg);
+  box-shadow:
+    2px 2px 0 1px rgba(0,0,0,.35),
+    5px 5px 0 1px rgba(0,0,0,.25),
+    9px 9px 0 1px rgba(0,0,0,.15),
+    0 40px 64px rgba(0,0,0,.55);
+}
+#cordel-btn{
+  font-family:'IM Fell DW Pica',serif;font-style:italic;
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(224,138,26,.55);
+  border:1px solid rgba(224,138,26,.2);
+  background:none;cursor:pointer;
+  padding:8px 20px;transition:all .3s;
+}
+#cordel-btn:hover{
+  color:var(--A);border-color:rgba(224,138,26,.5);
+}
+#cordel-btn span{
+  display:inline-block;transition:transform .3s;
+}
+#cordel-btn:hover span{transform:translateX(4px)}
+
+/* ── ESTADO ABERTO ── */
+#cordel-aberto{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+}
+#cordel-aberto.ativo{display:flex}
+
+/* Wrapper que faz o scale para caber na tela */
+#cordel-sanfona-wrap{
+  position:relative;
+  width:100%;
+  display:flex;justify-content:center;
+  overflow:hidden; /* sem scrollbar */
+}
+#cordel-sanfona{
+  display:flex;
+  flex-direction:row;
+  transform-origin:top left;
+  /* JS vai calcular o scale e a margin */
+}
+
+/* ── PÁGINA DO CORDEL ── */
+.cp{
+  width:260px;
+  min-height:370px;
+  flex-shrink:0;
+  position:relative;
+  overflow:hidden;
+
+  /* PAPEL VELHO — cor base + sujeiras */
+  background-color:#D4BC82;
+  background-image:
+    /* Borra de café 1 */
+    radial-gradient(ellipse 90px 70px at 18% 72%,rgba(90,55,20,.12) 0%,transparent 70%),
+    /* Borra de café 2 (anel) */
+    radial-gradient(circle 32px at 82% 22%,transparent 22px,rgba(90,55,20,.09) 23px,transparent 32px),
+    /* Mancha café pequena */
+    radial-gradient(ellipse 28px 22px at 65% 85%,rgba(90,55,20,.08) 0%,transparent 60%),
+    /* Amarelamento de borda superior */
+    linear-gradient(to bottom,rgba(100,70,10,.12) 0%,transparent 18%),
+    /* Amarelamento esquerda */
+    linear-gradient(to right,rgba(100,70,10,.1) 0%,transparent 20%),
+    /* Linha de dobra central */
+    linear-gradient(to right,transparent 49.2%,rgba(0,0,0,.06) 49.5%,transparent 50.8%),
+    /* Deterioração borda direita */
+    linear-gradient(to left,rgba(80,50,10,.08) 0%,transparent 22%);
+
+  /* Filtro de grão / deterioração */
+  filter:contrast(1.04) saturate(.92);
+  border-right:1px solid rgba(0,0,0,.12);
+
+  font-family:'Special Elite','IM Fell DW Pica',serif;
+}
+
+/* Grain overlay via pseudo-element */
+.cp::before{
+  content:'';
+  position:absolute;inset:0;z-index:5;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.09'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply;
+}
+
+/* Foxing (pontos de oxidação) */
+.cp::after{
+  content:'';
+  position:absolute;inset:0;z-index:4;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle 2px at 12% 34%,rgba(100,65,20,.18) 0%,transparent 100%),
+    radial-gradient(circle 1.5px at 88% 48%,rgba(100,65,20,.14) 0%,transparent 100%),
+    radial-gradient(circle 2px at 45% 78%,rgba(100,65,20,.16) 0%,transparent 100%),
+    radial-gradient(circle 1px at 72% 15%,rgba(100,65,20,.12) 0%,transparent 100%),
+    radial-gradient(circle 1.5px at 33% 92%,rgba(100,65,20,.1) 0%,transparent 100%),
+    radial-gradient(circle 1px at 95% 66%,rgba(100,65,20,.13) 0%,transparent 100%),
+    radial-gradient(circle 2.5px at 58% 42%,rgba(100,65,20,.08) 0%,transparent 100%);
+  mix-blend-mode:multiply;
+}
+
+/* Borda interna das páginas */
+.cp-inner{
+  position:relative;z-index:6;
+  height:100%;
+  border:1.5px solid rgba(26,10,6,.5);
+  margin:5px;
+  padding:10px 12px 22px;
+  display:flex;flex-direction:column;
+}
+
+/* ── CAPA ── */
+.cp-tipo{
+  font-family:'IM Fell DW Pica',serif;
+  font-size:6.5px;letter-spacing:.3em;text-transform:uppercase;
+  color:#1A0A06;text-align:center;
+  border-bottom:1px solid rgba(26,10,6,.35);
+  padding-bottom:5px;margin-bottom:6px;
+}
+.cp-xilo{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  padding:4px 0;
+}
+.cp-xilo svg{width:100%;max-height:160px}
+.cp-titulo{
+  font-family:'IM Fell DW Pica',serif;
+  font-size:15px;font-weight:700;
+  color:#1A0A06;text-align:center;
+  line-height:1.1;margin-bottom:3px;
+}
+.cp-autor{
+  font-family:'Special Elite',serif;
+  font-size:7.5px;text-align:center;
+  color:rgba(26,10,6,.5);margin-top:4px;
+  letter-spacing:.05em;
+}
+
+/* ── PÁGINAS INTERNAS ── */
+.cp-header{
+  display:flex;justify-content:space-between;
+  font-family:'IM Fell DW Pica',serif;font-style:italic;
+  font-size:6px;letter-spacing:.08em;
+  color:rgba(26,10,6,.35);
+  border-bottom:1px solid rgba(26,10,6,.2);
+  padding-bottom:5px;margin-bottom:10px;
+}
+.cp-versos{
+  flex:1;
+  font-family:'Special Elite',serif;
+  font-size:11px;
+  color:#1A0A06;
+  line-height:1.9;
+  text-align:center;
+}
+.cp-versos p{margin:0}
+.cp-versos .vr{color:#8B2218;font-style:italic}
+.cp-sep{
+  text-align:center;color:rgba(26,10,6,.25);
+  font-size:9px;letter-spacing:.25em;margin:6px 0;
+}
+.cp-num{
+  position:absolute;bottom:8px;left:0;right:0;
+  text-align:center;z-index:7;
+  font-family:'Special Elite',serif;
+  font-size:7px;color:rgba(26,10,6,.3);
+}
+
+/* ── CONTRACAPA / FINAL ── */
+.cp-final .cp-inner{
+  align-items:center;justify-content:center;
+  text-align:center;gap:8px;
+}
+.cp-final-star{width:44px;height:44px;opacity:.35}
+.cp-final-ttl{
+  font-family:'IM Fell DW Pica',serif;
+  font-size:9px;color:#1A0A06;line-height:1.4;
+}
+.cp-final-cred{
+  font-family:'Special Elite',serif;
+  font-size:7.5px;color:rgba(26,10,6,.5);
+  line-height:1.65;
+}
+.cp-final-nota{
+  font-family:'Special Elite',serif;
+  font-size:6.5px;font-style:italic;
+  color:rgba(26,10,6,.3);
+  border-top:1px solid rgba(26,10,6,.15);
+  padding-top:6px;margin-top:4px;
+}
+
+/* ── FECHAR / UI ── */
+#cordel-fechar{
+  font-family:'IM Fell DW Pica',serif;font-style:italic;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(224,138,26,.4);
+  background:none;border:none;cursor:pointer;
+  padding:6px 16px;transition:color .3s;
+}
+#cordel-fechar:hover{color:var(--A)}
+
+/* ── ANIMAÇÃO DE ABERTURA (sanfona) ── */
+.cp{
+  transform-origin:left center;
+  transition:transform .35s ease, opacity .35s ease;
+}
+.cp.fechada{
+  transform:scaleX(0);
+  opacity:0;
+}
+
+/* ══ MOBILE: vertical ══ */
+@media(max-width:768px){
+  #cordel-sanfona{
+    flex-direction:column !important;
+    transform:none !important;
+    margin-left:0 !important;
+    width:100%;
+  }
+  #cordel-sanfona-wrap{overflow:visible}
+  .cp{width:100%;min-height:auto}
+  #cordel-sanfona-wrap{padding:0 16px}
+  #cordel-capa-card{width:min(200px,70vw)}
+}
+
 /* ─── RESPONSIVE ─── */
 /* ═══ NAV MOBILE ═══ */
 #nav-toggle{
@@ -1304,269 +1563,295 @@ footer{
 
 <!-- ═══ 3. CORDEL — FOLHETO NORDESTINO ═══ -->
 <section id="cordel">
-  <!-- STICKY STAGE -->
-  <div id="cordel-stage">
 
-    <!-- LIVRO FÍSICO -->
-    <div id="cordel-book">
-      <div id="cordel-track">
-
-        <!-- CAPA (pág 0) -->
-        <div class="cp cp-capa">
-          <div class="capa-topo"><span>Literatura de Cordel</span></div>
-          <div class="capa-xilo"><svg viewBox="0 0 288 190" xmlns="http://www.w3.org/2000/svg" fill="#1A0A06">
-  <!-- Céu / fundo da cena -->
-  <rect width="288" height="190" fill="#EDE0BB"/>
-  <!-- LUA -->
-  <circle cx="244" cy="28" r="18" fill="#1A0A06"/>
-  <circle cx="252" cy="22" r="14" fill="#EDE0BB"/>
-  <!-- ESTRELAS -->
-  <circle cx="40" cy="18" r="2.5" fill="#1A0A06"/>
-  <circle cx="70" cy="10" r="2" fill="#1A0A06"/>
-  <circle cx="120" cy="8" r="2.5" fill="#1A0A06"/>
-  <circle cx="180" cy="14" r="2" fill="#1A0A06"/>
-  <circle cx="210" cy="6" r="2.5" fill="#1A0A06"/>
-  <!-- CHÃO -->
-  <rect x="0" y="160" width="288" height="30" fill="#1A0A06"/>
-  <!-- Vegetação chão -->
-  <path d="M0,160 Q4,148 8,160 Q10,150 14,160 Q16,152 20,160" fill="#1A0A06"/>
-  <path d="M40,160 Q44,150 48,160 Q50,152 54,160" fill="#1A0A06"/>
-  <path d="M230,160 Q234,148 238,160 Q240,152 244,160 Q246,150 250,160" fill="#1A0A06"/>
-  <!-- MANDACARU esquerda -->
-  <rect x="12" y="75" width="10" height="88" rx="4" fill="#1A0A06"/>
-  <path d="M22,100 Q36,100 36,116 Q36,126 30,126" stroke="#1A0A06" stroke-width="8" fill="none" stroke-linecap="round"/>
-  <path d="M12,118 Q0,118 0,132 Q0,140 6,140" stroke="#1A0A06" stroke-width="7" fill="none" stroke-linecap="round"/>
-  <circle cx="17" cy="73" r="7" fill="#1A0A06"/>
-  <!-- MANDACARU direita -->
-  <rect x="255" y="85" width="9" height="76" rx="3.5" fill="#1A0A06"/>
-  <path d="M264,108 Q275,108 275,120 Q275,130 270,130" stroke="#1A0A06" stroke-width="6.5" fill="none" stroke-linecap="round"/>
-  <circle cx="259" cy="83" r="6" fill="#1A0A06"/>
-  <!-- CASA ao fundo -->
-  <path d="M185,130 L185,158 L220,158 L220,130" fill="#1A0A06"/>
-  <path d="M180,132 L202,110 L224,132Z" fill="#1A0A06"/>
-  <rect x="195" y="140" width="10" height="18" fill="#EDE0BB"/>
-  <rect x="186" y="136" width="8" height="8" fill="#EDE0BB"/>
-  <rect x="210" y="136" width="8" height="8" fill="#EDE0BB"/>
-  <!-- CRUZ de igreja -->
-  <rect x="198" y="102" width="5" height="14" fill="#1A0A06"/>
-  <rect x="195" y="106" width="11" height="4" fill="#1A0A06"/>
-  <!-- FIGURA 1: CANTADOR DO SERTÃO (esquerda, chapéu de couro) -->
-  <!-- Cabeça -->
-  <circle cx="88" cy="72" r="16" fill="#1A0A06"/>
-  <!-- Chapéu de couro -->
-  <ellipse cx="88" cy="58" rx="22" ry="7" fill="#1A0A06"/>
-  <path d="M72,60 Q76,44 88,42 Q100,44 104,60" fill="#1A0A06"/>
-  <!-- Corpo -->
-  <rect x="76" y="87" width="24" height="42" rx="6" fill="#1A0A06"/>
-  <!-- Braço viola -->
-  <path d="M100,96 Q118,88 122,92" stroke="#1A0A06" stroke-width="9" stroke-linecap="round" fill="none"/>
-  <!-- VIOLA -->
-  <ellipse cx="130" cy="108" rx="14" ry="20" fill="#1A0A06"/>
-  <ellipse cx="130" cy="108" rx="8" ry="13" fill="#EDE0BB"/>
-  <rect x="127" y="88" width="6" height="42" rx="2" fill="#1A0A06"/>
-  <line x1="124" y1="98" x2="136" y2="98" stroke="#EDE0BB" stroke-width="1.5"/>
-  <line x1="123" y1="106" x2="137" y2="106" stroke="#EDE0BB" stroke-width="1.5"/>
-  <line x1="123" y1="114" x2="137" y2="114" stroke="#EDE0BB" stroke-width="1.5"/>
-  <!-- Braço esquerdo -->
-  <path d="M76,98 Q60,108 58,124" stroke="#1A0A06" stroke-width="9" stroke-linecap="round" fill="none"/>
-  <!-- Pernas -->
-  <line x1="83" y1="128" x2="80" y2="160" stroke="#1A0A06" stroke-width="9" stroke-linecap="round"/>
-  <line x1="97" y1="128" x2="100" y2="160" stroke="#1A0A06" stroke-width="9" stroke-linecap="round"/>
-  <!-- FIGURA 2: CANTADOR DA CIDADE (direita, sem chapéu, paletó) -->
-  <circle cx="178" cy="72" r="15" fill="#1A0A06"/>
-  <!-- Cabelo penteado -->
-  <path d="M163,68 Q165,58 178,56 Q191,58 193,68" fill="#1A0A06"/>
-  <!-- Paletó e gravata -->
-  <rect x="166" y="87" width="24" height="42" rx="5" fill="#1A0A06"/>
-  <!-- Gravata -->
-  <path d="M176,88 L180,88 L179,110 L178,108 L177,110Z" fill="#EDE0BB" opacity=".6"/>
-  <!-- Braço direito -->
-  <path d="M190,96 Q200,106 200,118" stroke="#1A0A06" stroke-width="9" stroke-linecap="round" fill="none"/>
-  <!-- Braço esquerdo (apontando) -->
-  <path d="M166,100 Q150,96 145,90" stroke="#1A0A06" stroke-width="8" stroke-linecap="round" fill="none"/>
-  <!-- Pernas -->
-  <line x1="173" y1="128" x2="170" y2="160" stroke="#1A0A06" stroke-width="9" stroke-linecap="round"/>
-  <line x1="185" y1="128" x2="188" y2="160" stroke="#1A0A06" stroke-width="9" stroke-linecap="round"/>
-  <!-- Separador vertical entre os dois (fronteira sertão/cidade) -->
-  <line x1="144" y1="65" x2="144" y2="158" stroke="#1A0A06" stroke-width="1.5" stroke-dasharray="4,3" opacity=".35"/>
+  <!-- ESTADO FECHADO: card da capa clicável -->
+  <div id="cordel-fechado">
+    <div id="cordel-capa-card" role="button" tabindex="0" aria-label="Abrir o cordel">
+      <!-- Miniatura da capa -->
+      <div class="cp" style="width:200px;min-height:282px">
+        <div class="cp-inner">
+          <div class="cp-tipo">Literatura de Cordel</div>
+          <div class="cp-xilo"><svg viewBox="0 0 240 165" xmlns="http://www.w3.org/2000/svg" fill="#1A0A06">
+  <!-- Paisagem sertão -->
+  <rect width="240" height="165" fill="none"/>
+  <!-- Lua + estrelas -->
+  <circle cx="205" cy="26" r="14" fill="#1A0A06"/>
+  <circle cx="212" cy="20" r="11" fill="#D4BC82"/>
+  <circle cx="38" cy="16" r="2.2" fill="#1A0A06"/>
+  <circle cx="68" cy="9" r="1.8" fill="#1A0A06"/>
+  <circle cx="108" cy="6" r="2" fill="#1A0A06"/>
+  <circle cx="158" cy="11" r="1.6" fill="#1A0A06"/>
+  <!-- Mandacaru esq -->
+  <rect x="10" y="68" width="8" height="80" rx="3"/>
+  <path d="M18,88 Q28,88 28,102 Q28,110 22,110" stroke="#1A0A06" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="14" cy="67" r="5"/>
+  <!-- Mandacaru dir -->
+  <rect x="218" y="76" width="7" height="72" rx="3"/>
+  <path d="M225,94 Q234,94 234,106 Q234,114 229,114" stroke="#1A0A06" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+  <circle cx="221" cy="75" r="4.5"/>
+  <!-- Casa -->
+  <path d="M162,118 L162,145 L196,145 L196,118" fill="#1A0A06"/>
+  <path d="M157,120 L179,100 L201,120Z" fill="#1A0A06"/>
+  <rect x="170" y="128" width="8" height="17" fill="#D4BC82"/>
+  <rect x="163" y="122" width="6" height="7" fill="#D4BC82"/>
+  <rect x="186" y="122" width="6" height="7" fill="#D4BC82"/>
+  <!-- Cruz -->
+  <rect x="176" y="93" width="4" height="11" fill="#1A0A06"/>
+  <rect x="173" y="96" width="10" height="3.5" fill="#1A0A06"/>
+  <!-- FIGURA SERTÃO (chapéu de couro, viola) -->
+  <circle cx="78" cy="62" r="13"/>
+  <ellipse cx="78" cy="50" rx="18" ry="6"/>
+  <path d="M63,52 Q65,38 78,36 Q91,38 93,52" fill="#1A0A06"/>
+  <rect x="68" y="75" width="20" height="38" rx="5"/>
+  <path d="M88,82 Q100,76 103,80" stroke="#1A0A06" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <ellipse cx="109" cy="98" rx="10" ry="14"/>
+  <ellipse cx="109" cy="98" rx="5.5" ry="8" fill="#D4BC82" opacity=".4"/>
+  <path d="M68,84 Q55,92 53,106" stroke="#1A0A06" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <line x1="73" y1="113" x2="70" y2="145" stroke="#1A0A06" stroke-width="7" stroke-linecap="round"/>
+  <line x1="87" y1="113" x2="90" y2="145" stroke="#1A0A06" stroke-width="7" stroke-linecap="round"/>
+  <!-- FIGURA CIDADE (paletó, sem chapéu) -->
+  <circle cx="155" cy="62" r="12"/>
+  <path d="M142,58 Q144,47 155,45 Q166,47 168,58" fill="#1A0A06"/>
+  <rect x="145" y="74" width="20" height="38" rx="4"/>
+  <path d="M145,82 Q135,88 133,100" stroke="#1A0A06" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M165,84 Q175,90 176,100" stroke="#1A0A06" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <line x1="150" y1="112" x2="147" y2="145" stroke="#1A0A06" stroke-width="7" stroke-linecap="round"/>
+  <line x1="162" y1="112" x2="165" y2="145" stroke="#1A0A06" stroke-width="7" stroke-linecap="round"/>
+  <!-- Separador pontilhado no meio -->
+  <line x1="118" y1="55" x2="118" y2="145" stroke="#1A0A06" stroke-width="1.2" stroke-dasharray="3,3" opacity=".3"/>
+  <!-- Chão -->
+  <rect x="0" y="145" width="240" height="20" fill="#1A0A06"/>
+  <path d="M0,145 Q6,137 12,145 Q14,139 18,145 Q22,140 26,145" fill="#1A0A06"/>
+  <path d="M200,145 Q206,136 212,145 Q215,140 218,145 Q222,138 226,145" fill="#1A0A06"/>
 </svg></div>
-          <div class="capa-titulo">Cante Lá<br>que eu<em>Canto Cá</em></div>
-          <div class="capa-autor">Patativa do Assaré</div>
-          <div class="capa-pronac">Recorte intencional &mdash; De nada em nada, tudo. &middot; Bourbon Films 2025</div>
+          <div class="cp-titulo">Cante Lá<br>que eu<br>Canto Cá</div>
+          <div class="cp-autor">Patativa do Assaré</div>
+        </div>
+      </div>
+    </div>
+    <button id="cordel-btn" onclick="abrirCordel()">
+      Abrir o cordel &nbsp;<span>&#8594;</span>
+    </button>
+  </div>
+
+  <!-- ESTADO ABERTO: sanfona -->
+  <div id="cordel-aberto">
+    <div id="cordel-sanfona-wrap">
+      <div id="cordel-sanfona">
+
+        <!-- PÁG 0: CAPA -->
+        <div class="cp fechada">
+          <div class="cp-inner">
+            <div class="cp-tipo">Literatura de Cordel</div>
+            <div class="cp-xilo" style="flex:1"><svg viewBox="0 0 240 165" xmlns="http://www.w3.org/2000/svg" fill="#1A0A06">
+  <!-- Paisagem sertão -->
+  <rect width="240" height="165" fill="none"/>
+  <!-- Lua + estrelas -->
+  <circle cx="205" cy="26" r="14" fill="#1A0A06"/>
+  <circle cx="212" cy="20" r="11" fill="#D4BC82"/>
+  <circle cx="38" cy="16" r="2.2" fill="#1A0A06"/>
+  <circle cx="68" cy="9" r="1.8" fill="#1A0A06"/>
+  <circle cx="108" cy="6" r="2" fill="#1A0A06"/>
+  <circle cx="158" cy="11" r="1.6" fill="#1A0A06"/>
+  <!-- Mandacaru esq -->
+  <rect x="10" y="68" width="8" height="80" rx="3"/>
+  <path d="M18,88 Q28,88 28,102 Q28,110 22,110" stroke="#1A0A06" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="14" cy="67" r="5"/>
+  <!-- Mandacaru dir -->
+  <rect x="218" y="76" width="7" height="72" rx="3"/>
+  <path d="M225,94 Q234,94 234,106 Q234,114 229,114" stroke="#1A0A06" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+  <circle cx="221" cy="75" r="4.5"/>
+  <!-- Casa -->
+  <path d="M162,118 L162,145 L196,145 L196,118" fill="#1A0A06"/>
+  <path d="M157,120 L179,100 L201,120Z" fill="#1A0A06"/>
+  <rect x="170" y="128" width="8" height="17" fill="#D4BC82"/>
+  <rect x="163" y="122" width="6" height="7" fill="#D4BC82"/>
+  <rect x="186" y="122" width="6" height="7" fill="#D4BC82"/>
+  <!-- Cruz -->
+  <rect x="176" y="93" width="4" height="11" fill="#1A0A06"/>
+  <rect x="173" y="96" width="10" height="3.5" fill="#1A0A06"/>
+  <!-- FIGURA SERTÃO (chapéu de couro, viola) -->
+  <circle cx="78" cy="62" r="13"/>
+  <ellipse cx="78" cy="50" rx="18" ry="6"/>
+  <path d="M63,52 Q65,38 78,36 Q91,38 93,52" fill="#1A0A06"/>
+  <rect x="68" y="75" width="20" height="38" rx="5"/>
+  <path d="M88,82 Q100,76 103,80" stroke="#1A0A06" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <ellipse cx="109" cy="98" rx="10" ry="14"/>
+  <ellipse cx="109" cy="98" rx="5.5" ry="8" fill="#D4BC82" opacity=".4"/>
+  <path d="M68,84 Q55,92 53,106" stroke="#1A0A06" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <line x1="73" y1="113" x2="70" y2="145" stroke="#1A0A06" stroke-width="7" stroke-linecap="round"/>
+  <line x1="87" y1="113" x2="90" y2="145" stroke="#1A0A06" stroke-width="7" stroke-linecap="round"/>
+  <!-- FIGURA CIDADE (paletó, sem chapéu) -->
+  <circle cx="155" cy="62" r="12"/>
+  <path d="M142,58 Q144,47 155,45 Q166,47 168,58" fill="#1A0A06"/>
+  <rect x="145" y="74" width="20" height="38" rx="4"/>
+  <path d="M145,82 Q135,88 133,100" stroke="#1A0A06" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M165,84 Q175,90 176,100" stroke="#1A0A06" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <line x1="150" y1="112" x2="147" y2="145" stroke="#1A0A06" stroke-width="7" stroke-linecap="round"/>
+  <line x1="162" y1="112" x2="165" y2="145" stroke="#1A0A06" stroke-width="7" stroke-linecap="round"/>
+  <!-- Separador pontilhado no meio -->
+  <line x1="118" y1="55" x2="118" y2="145" stroke="#1A0A06" stroke-width="1.2" stroke-dasharray="3,3" opacity=".3"/>
+  <!-- Chão -->
+  <rect x="0" y="145" width="240" height="20" fill="#1A0A06"/>
+  <path d="M0,145 Q6,137 12,145 Q14,139 18,145 Q22,140 26,145" fill="#1A0A06"/>
+  <path d="M200,145 Q206,136 212,145 Q215,140 218,145 Q222,138 226,145" fill="#1A0A06"/>
+</svg></div>
+            <div class="cp-titulo" style="font-size:18px">Cante Lá<br>que eu<br><span style="font-family:Parisienne,cursive;font-size:22px;color:#8B2218">Canto Cá</span></div>
+            <div class="cp-autor">Patativa do Assaré &middot; Assaré, CE &middot; 1909&ndash;2002</div>
+          </div>
         </div>
 
         <!-- PÁG 1 -->
-        <div class="cp cp-pag">
-          <div class="pag-header"><span>Cante Lá Que Eu Canto Cá</span><span>Patativa do Assaré</span></div>
-          <div class="pag-versos">
-            <p>Poeta, cantô da rua,</p>
-            <p>Que na cidade nasceu,</p>
-            <p>Cante a cidade que é sua,</p>
-            <p>Que eu canto o sertão que é meu.</p>
-            <div class="pag-sep">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <p>Você teve inducação,</p>
-            <p>Aprendeu munta ciença,</p>
-            <p>Mas das coisa do sertão</p>
-            <p>Não tem boa esperiença.</p>
+        <div class="cp fechada">
+          <div class="cp-inner">
+            <div class="cp-header"><span>Cante Lá Que Eu Canto Cá</span><span>2</span></div>
+            <div class="cp-versos">
+              <p>Poeta, cantô da rua,</p>
+              <p>Que na cidade nasceu,</p>
+              <p>Cante a cidade que é sua,</p>
+              <p>Que eu canto o sertão que é meu.</p>
+              <div class="cp-sep">&#10022; &#10022; &#10022;</div>
+              <p>Você teve inducação,</p>
+              <p>Aprendeu munta ciença,</p>
+              <p>Mas das coisa do sertão</p>
+              <p>Não tem boa esperiença.</p>
+            </div>
           </div>
-          <div class="pag-ilus"><svg viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg" fill="#1A0A06">
-  <ellipse cx="30" cy="30" rx="14" ry="18"/>
-  <ellipse cx="30" cy="30" rx="8" ry="12" fill="#EDE0BB" opacity=".4"/>
-  <rect x="27" y="12" width="6" height="36" rx="2"/>
-  <line x1="24" y1="20" x2="36" y2="20" stroke="#1A0A06" stroke-width="2"/>
-  <line x1="22" y1="28" x2="38" y2="28" stroke="#1A0A06" stroke-width="2"/>
-  <line x1="22" y1="36" x2="38" y2="36" stroke="#1A0A06" stroke-width="2"/>
-</svg></div>
-          <div class="pag-num">2</div>
+          <div class="cp-num">2</div>
         </div>
 
         <!-- PÁG 2 -->
-        <div class="cp cp-pag">
-          <div class="pag-header"><span>Cante Lá Que Eu Canto Cá</span><span>Patativa do Assaré</span></div>
-          <div class="pag-versos">
-            <p>Nunca fez uma paioça,</p>
-            <p>Nunca trabaiou na roça,</p>
-            <p>Não pode conhecê bem,</p>
-            <div class="pag-sep">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <p>Pois nesta penosa vida,</p>
-            <p>Só quem provou da comida</p>
-            <p>Sabe o gosto que ela tem.</p>
+        <div class="cp fechada">
+          <div class="cp-inner">
+            <div class="cp-header"><span>Cante Lá Que Eu Canto Cá</span><span>3</span></div>
+            <div class="cp-versos">
+              <p>Nunca fez uma paioça,</p>
+              <p>Nunca trabaiou na roça,</p>
+              <p>Não pode conhecê bem,</p>
+              <div class="cp-sep">&#10022; &#10022; &#10022;</div>
+              <p>Pois nesta penosa vida,</p>
+              <p>Só quem provou da comida</p>
+              <p>Sabe o gosto que ela tem.</p>
+            </div>
           </div>
-          <div class="pag-ilus"><svg viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg" fill="#1A0A06">
-  <rect x="26" y="8" width="8" height="40" rx="3"/>
-  <path d="M34,18 Q44,18 44,26 Q44,32 38,32" stroke="#1A0A06" stroke-width="6.5" fill="none" stroke-linecap="round"/>
-  <path d="M26,24 Q16,24 16,32 Q16,38 22,38" stroke="#1A0A06" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <circle cx="30" cy="7" r="5"/>
-</svg></div>
-          <div class="pag-num">3</div>
+          <div class="cp-num">3</div>
         </div>
 
         <!-- PÁG 3 -->
-        <div class="cp cp-pag">
-          <div class="pag-header"><span>Cante Lá Que Eu Canto Cá</span><span>Patativa do Assaré</span></div>
-          <div class="pag-versos">
-            <p>Amigo, não tenha quêxa,</p>
-            <p>Veja que eu tenho razão</p>
-            <p>Em lhe dize que não mexa</p>
-            <p>Nas coisa do meu sertão.</p>
-            <div class="pag-sep">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <p>Pois, se não sabe o colega</p>
-            <p>De quá manêra se pega</p>
-            <p>Num ferro pra trabaiá,</p>
-            <div class="pag-sep">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <p class="refrao">Por favô, não mexa aqui,</p>
-            <p class="refrao">Que eu também não mexo aí,</p>
-            <p class="refrao">Cante lá que eu canto cá.</p>
+        <div class="cp fechada">
+          <div class="cp-inner">
+            <div class="cp-header"><span>Cante Lá Que Eu Canto Cá</span><span>4</span></div>
+            <div class="cp-versos">
+              <p>Amigo, não tenha quêxa,</p>
+              <p>Veja que eu tenho razão</p>
+              <p>Em lhe dize que não mexa</p>
+              <p>Nas coisa do meu sertão.</p>
+              <div class="cp-sep">&#10022; &#10022; &#10022;</div>
+              <p>Pois, se não sabe o colega</p>
+              <p>De quá manêra se pega</p>
+              <p>Num ferro pra trabaiá,</p>
+              <div class="cp-sep">&#10022;</div>
+              <p class="vr">Por favô, não mexa aqui,</p>
+              <p class="vr">Que eu também não mexo aí,</p>
+              <p class="vr">Cante lá que eu canto cá.</p>
+            </div>
           </div>
-          <div class="pag-num">4</div>
+          <div class="cp-num">4</div>
         </div>
 
         <!-- PÁG 4 -->
-        <div class="cp cp-pag">
-          <div class="pag-header"><span>Cante Lá Que Eu Canto Cá</span><span>Patativa do Assaré</span></div>
-          <div class="pag-versos">
-            <p>Mas porém, eu não invejo</p>
-            <p>O grande tesôro seu,</p>
-            <p>Os livro do seu colejo,</p>
-            <p>Onde você aprendeu.</p>
-            <div class="pag-sep">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <p>Pra gente aqui sê poeta</p>
-            <p>E fazê rima compreta,</p>
-            <p>Não precisa professô;</p>
-            <div class="pag-sep">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <p>Basta vê no mês de maio,</p>
-            <p>Um poema em cada gaio</p>
-            <p>E um verso em cada fulô.</p>
+        <div class="cp fechada">
+          <div class="cp-inner">
+            <div class="cp-header"><span>Cante Lá Que Eu Canto Cá</span><span>5</span></div>
+            <div class="cp-versos">
+              <p>Mas porém, eu não invejo</p>
+              <p>O grande tesôro seu,</p>
+              <p>Os livro do seu colejo,</p>
+              <p>Onde você aprendeu.</p>
+              <div class="cp-sep">&#10022; &#10022; &#10022;</div>
+              <p>Pra gente aqui sê poeta</p>
+              <p>E fazê rima compreta,</p>
+              <p>Não precisa professô;</p>
+              <div class="cp-sep">&#10022; &#10022; &#10022;</div>
+              <p>Basta vê no mês de maio,</p>
+              <p>Um poema em cada gaio</p>
+              <p>E um verso em cada fulô.</p>
+            </div>
           </div>
-          <div class="pag-ilus"><svg viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg" fill="#1A0A06">
-  <ellipse cx="30" cy="32" rx="18" ry="14"/>
-  <circle cx="18" cy="22" r="10"/>
-  <polygon points="10,22 2,26 10,30" fill="#1A0A06"/>
-  <path d="M30,22 Q14,12 16,4 Q24,18 20,8 Q28,18 24,12" stroke="#1A0A06" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <path d="M24,44 L20,50 M30,45 L30,50 M36,44 L40,50" stroke="#1A0A06" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-</svg></div>
-          <div class="pag-num">5</div>
+          <div class="cp-num">5</div>
         </div>
 
         <!-- PÁG 5 -->
-        <div class="cp cp-pag">
-          <div class="pag-header"><span>Cante Lá Que Eu Canto Cá</span><span>Patativa do Assaré</span></div>
-          <div class="pag-versos">
-            <p>Eu não posso lhe inveja</p>
-            <p>Nem você invejá eu</p>
-            <p>O que Deus lhe deu por lá,</p>
-            <p>Aqui Deus também me deu.</p>
-            <div class="pag-sep">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <p>Pois minha boa muié,</p>
-            <p>Me estima com munta fé,</p>
-            <p>Me abraça, beja e qué bem</p>
-            <div class="pag-sep">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <p>E ninguém pode negá</p>
-            <p>Que das coisa naturá</p>
-            <p>Tem ela o que a sua tem.</p>
+        <div class="cp fechada">
+          <div class="cp-inner">
+            <div class="cp-header"><span>Cante Lá Que Eu Canto Cá</span><span>6</span></div>
+            <div class="cp-versos">
+              <p>Eu não posso lhe inveja</p>
+              <p>Nem você invejá eu</p>
+              <p>O que Deus lhe deu por lá,</p>
+              <p>Aqui Deus também me deu.</p>
+              <div class="cp-sep">&#10022; &#10022; &#10022;</div>
+              <p>Pois minha boa muié,</p>
+              <p>Me estima com munta fé,</p>
+              <p>Me abraça, beja e qué bem</p>
+              <div class="cp-sep">&#10022; &#10022; &#10022;</div>
+              <p>E ninguém pode negá</p>
+              <p>Que das coisa naturá</p>
+              <p>Tem ela o que a sua tem.</p>
+            </div>
           </div>
-          <div class="pag-ilus"><svg viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg" fill="#8B2218">
-  <path d="M30,42 C30,42 8,28 8,16 C8,8 16,4 22,8 C26,10 30,14 30,14 C30,14 34,10 38,8 C44,4 52,8 52,16 C52,28 30,42 30,42Z"/>
-</svg></div>
-          <div class="pag-num">6</div>
+          <div class="cp-num">6</div>
         </div>
 
-        <!-- PÁG 6 — refrão final -->
-        <div class="cp cp-pag">
-          <div class="pag-header"><span>Cante Lá Que Eu Canto Cá</span><span>Patativa do Assaré</span></div>
-          <div class="pag-versos">
-            <p>Aqui findo esta verdade,</p>
-            <p>Toda cheia de razão:</p>
-            <p>Fique na sua cidade</p>
-            <p>Que eu fico no meu sertão.</p>
-            <div class="pag-sep">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <p>Já lhe mostrei um ispeio,</p>
-            <p>Já lhe dei grande conseio</p>
-            <p>Que você deve toma.</p>
-            <div class="pag-sep">✦ &nbsp; ✦ &nbsp; ✦</div>
-            <p class="refrao">Por favô, não mêxa aqui,</p>
-            <p class="refrao">Que eu também não mexo aí,</p>
-            <p class="refrao">Cante lá</p>
-            <p class="refrao">Que eu canto cá.</p>
+        <!-- PÁG 6 -->
+        <div class="cp fechada">
+          <div class="cp-inner">
+            <div class="cp-header"><span>Cante Lá Que Eu Canto Cá</span><span>7</span></div>
+            <div class="cp-versos">
+              <p>Aqui findo esta verdade,</p>
+              <p>Toda cheia de razão:</p>
+              <p>Fique na sua cidade</p>
+              <p>Que eu fico no meu sertão.</p>
+              <div class="cp-sep">&#10022; &#10022; &#10022;</div>
+              <p>Já lhe mostrei um ispeio,</p>
+              <p>Já lhe dei grande conseio</p>
+              <p>Que você deve toma.</p>
+              <div class="cp-sep">&#10022;</div>
+              <p class="vr">Por favô, não mêxa aqui,</p>
+              <p class="vr">Que eu também não mexo aí,</p>
+              <p class="vr">Cante lá</p>
+              <p class="vr">Que eu canto cá.</p>
+            </div>
           </div>
-          <div class="pag-ilus"><svg viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg" fill="#1A0A06">
-  <circle cx="30" cy="26" r="10"/>
-  <path d="M30,6 L30,14 M30,38 L30,46 M10,26 L18,26 M42,26 L50,26 M14,10 L20,16 M40,36 L46,42 M46,10 L40,16 M20,36 L14,42" stroke="#1A0A06" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-</svg></div>
-          <div class="pag-num">7</div>
+          <div class="cp-num">7</div>
         </div>
 
-        <!-- PÁG 7 — CRÉDITO / CONTRACAPA -->
-        <div class="cp cp-final">
-          <div class="final-ornamento">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="#1A0A06">
-              <polygon points="32,4 35,24 55,24 39,37 45,57 32,44 19,57 25,37 9,24 29,24"/>
+        <!-- PÁG 7: CONTRACAPA -->
+        <div class="cp cp-final fechada">
+          <div class="cp-inner">
+            <svg class="cp-final-star" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" fill="#1A0A06">
+              <polygon points="22,2 25,16 40,16 28,26 32,40 22,31 12,40 16,26 4,16 19,16"/>
             </svg>
+            <div class="cp-final-ttl">De nada em nada, tudo.<br><em style="font-family:Parisienne,cursive;font-size:13px;color:#8B2218">Documentário Nordestino</em></div>
+            <div class="cp-final-cred">
+              <strong>Cante Lá Que Eu Canto Cá</strong><br>
+              Patativa do Assaré<br>
+              Antônio Gonçalves da Silva<br>
+              Assaré, CE &middot; 1909&ndash;2002<br>
+              <em>In: Cante lá que eu canto cá</em><br>
+              Ed. Vozes, Petrópolis, 1978
+            </div>
+            <div class="cp-final-nota">Recorte intencional &mdash;<br>não segue a sequência original.<br>Reprodução para fins culturais.</div>
           </div>
-          <div class="final-titulo">De nada em nada, tudo.<br><span style="font-family:'Parisienne',cursive;font-size:18px;color:#8B2218">Documentário Nordestino</span></div>
-          <div class="final-credito">
-            <strong>Cante Lá Que Eu Canto Cá</strong><br>
-            Patativa do Assaré<br>
-            Antônio Gonçalves da Silva<br>
-            Assaré, Ceará &middot; 1909&ndash;2002<br>
-            In: <em>Cante lá que eu canto cá</em><br>Ed. Vozes, Petrópolis, 1978
-          </div>
-          <div class="final-nota">Recorte intencional &mdash; não segue<br>a sequência original do poema<br>Reprodução para fins culturais</div>
+          <div class="cp-num">8</div>
         </div>
 
-      </div><!-- fim #cordel-track -->
-    </div><!-- fim #cordel-book -->
-
-    <!-- UI: pontos e hint -->
-    <div id="cordel-ui">
-      <div id="cordel-dots"></div>
-      <p id="cordel-hint">&#8595; role para virar a página</p>
+      </div><!-- fim sanfona -->
     </div>
 
-  </div><!-- fim #cordel-stage -->
+    <button id="cordel-fechar" onclick="fecharCordel()">&#8592; Fechar o cordel</button>
+  </div>
 
-  <!-- Espaço de scroll: 8 páginas (0 a 7) = 7 transições -->
-  <div id="cordel-ghost" style="height:700vh"></div>
 </section>
 
 <!-- DIV -->
@@ -2161,6 +2446,50 @@ if(pgEl) tlio.observe(pgEl);
   window.addEventListener('resize',function(){current=-1;render();},{passive:true});
   setTimeout(render,120);
 })();
+
+// ── CORDEL SANFONA ──
+function abrirCordel(){
+  var isMobile=window.innerWidth<=768;
+  document.getElementById('cordel-fechado').style.display='none';
+  var aberto=document.getElementById('cordel-aberto');
+  aberto.classList.add('ativo');
+
+  // Calcular scale apenas em desktop
+  if(!isMobile){
+    var pages=document.querySelectorAll('#cordel-sanfona .cp');
+    var totalW=pages.length*260; // 8 * 260 = 2080px
+    var avail=window.innerWidth-32;
+    var scale=Math.min(1,avail/totalW);
+    var sanfona=document.getElementById('cordel-sanfona');
+    sanfona.style.transform='scale('+scale+')';
+    sanfona.style.transformOrigin='top left';
+    // Ajustar a altura do wrapper para o scale
+    var wrap=document.getElementById('cordel-sanfona-wrap');
+    wrap.style.height=(370*scale+20)+'px';
+    // Centralizar: margin-left para centrar o container escalado
+    var scaledW=totalW*scale;
+    sanfona.style.marginLeft=((avail-scaledW)/2)+'px';
+  }
+
+  // Desdobrar as páginas em sequência (sanfona)
+  var pages=document.querySelectorAll('#cordel-sanfona .cp');
+  pages.forEach(function(p,i){
+    setTimeout(function(){p.classList.remove('fechada');},i*70);
+  });
+}
+
+function fecharCordel(){
+  var pages=document.querySelectorAll('#cordel-sanfona .cp');
+  // Dobrar em ordem reversa
+  for(var i=pages.length-1;i>=0;i--){
+    (function(el,delay){setTimeout(function(){el.classList.add('fechada');},delay);})(pages[i],(pages.length-1-i)*50);
+  }
+  setTimeout(function(){
+    document.getElementById('cordel-aberto').classList.remove('ativo');
+    document.getElementById('cordel-fechado').style.display='flex';
+  },pages.length*50+200);
+}
+
 </script>
 </body>
 </html>
