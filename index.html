@@ -2,9 +2,30 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>De nada em nada, tudo. | Bourbon Films</title>
-<meta name="description" content="Documentário sobre a poesia nordestina. Aprovado pela Lei Rouanet. PRONAC 258413.">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>De nada em nada, tudo. | Documentário Nordestino</title>
+<meta name="description" content="Documentário de média-metragem sobre a poesia nordestina. Repente, cordel, cantoria — um registro permanente das vozes vivas do Nordeste. Aprovado pela Lei Rouanet. PRONAC 258413.">
+<meta name="keywords" content="poesia nordestina, cordel, repente, cantoria, documentário, Nordeste, Lei Rouanet, Bourbon Films">
+<meta name="author" content="Bourbon Films">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://poesia.art.br">
+<!-- Open Graph / WhatsApp / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://poesia.art.br">
+<meta property="og:title" content="De nada em nada, tudo. — Documentário Nordestino">
+<meta property="og:description" content="A poesia que sobreviveu ao tempo, ao esquecimento e ao silêncio imposto sobre o Nordeste. Aprovado pela Lei Rouanet. PRONAC 258413.">
+<meta property="og:image" content="https://poesia.art.br/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="De nada em nada, tudo.">
+<!-- Twitter/X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="De nada em nada, tudo. — Documentário Nordestino">
+<meta name="twitter:description" content="A poesia que sobreviveu ao tempo, ao esquecimento e ao silêncio imposto sobre o Nordeste.">
+<meta name="twitter:image" content="https://poesia.art.br/og-image.jpg">
+<!-- Favicon SVG (pássaro armorial) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231A0A06'/%3E%3Cellipse cx='16' cy='20' rx='9' ry='8' fill='%23E08A1A'/%3E%3Ccircle cx='16' cy='10' r='6' fill='%23E08A1A'/%3E%3Cpath d='M10,18 Q4,13 5,8 Q10,16 8,12 Q11,17 9,14' stroke='%23B86E0C' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M22,18 Q28,13 27,8 Q22,16 24,12 Q21,17 23,14' stroke='%23B86E0C' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M13,28 L11,32 M16,28.5 L16,32 M19,28 L21,32' stroke='%23E08A1A' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3Cpolygon points='10,10 8,14 10,14' fill='%23B86E0C'/%3E%3Ccircle cx='13' cy='9' r='1.5' fill='%231A0A06'/%3E%3Cpath d='M14,5 Q15,2 16,0 M16,4.5 Q17,2 18,0 M18,5 Q19.5,3 20,1' stroke='%23E08A1A' stroke-width='1.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=IM+Fell+DW+Pica:ital@0;1&family=Parisienne&display=swap" rel="stylesheet">
@@ -28,29 +49,30 @@ body{
   font-size:18px;line-height:1.72;overflow-x:hidden;
 }
 
-/* ─── CORPO DO SITE COM BORDA FIXA ─── */
-#page{
-  margin:var(--BW);
-  box-shadow:0 0 0 var(--BW) var(--K);
-  position:relative;
+/* ─── BORDA ARMORIAL ─── */
+/* Frame: padrão nas 4 faixas, sem se preocupar com cantos */
+#borda-frame{
+  position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:
+    url("data:image/svg+xml,%3Csvg width='24' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='24' height='16' fill='%231A0A06'/%3E%3Cpath d='M12,2 C10,5 8,8 9,11 L12,14 L15,11 C16,8 14,5 12,2Z' fill='%23E08A1A' opacity='.85'/%3E%3Ccircle cx='12' cy='1.5' r='1.4' fill='%23E08A1A' opacity='.68'/%3E%3C/svg%3E") 0    0    / 24px 16px repeat-x,
+    url("data:image/svg+xml,%3Csvg width='24' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='24' height='16' fill='%231A0A06'/%3E%3Cpath d='M12,2 C10,5 8,8 9,11 L12,14 L15,11 C16,8 14,5 12,2Z' fill='%23E08A1A' opacity='.85'/%3E%3Ccircle cx='12' cy='1.5' r='1.4' fill='%23E08A1A' opacity='.68'/%3E%3C/svg%3E") 0    100% / 24px 16px repeat-x,
+    url("data:image/svg+xml,%3Csvg width='16' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='24' fill='%231A0A06'/%3E%3Cpath d='M8,2 C6,5 4,8 5,11 L8,14 L11,11 C12,8 10,5 8,2Z' fill='%23E08A1A' opacity='.85'/%3E%3Ccircle cx='8' cy='1.5' r='1.4' fill='%23E08A1A' opacity='.68'/%3E%3C/svg%3E") 0    0    / 16px 24px repeat-y,
+    url("data:image/svg+xml,%3Csvg width='16' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='24' fill='%231A0A06'/%3E%3Cpath d='M8,2 C6,5 4,8 5,11 L8,14 L11,11 C12,8 10,5 8,2Z' fill='%23E08A1A' opacity='.85'/%3E%3Ccircle cx='8' cy='1.5' r='1.4' fill='%23E08A1A' opacity='.68'/%3E%3C/svg%3E") 100% 0    / 16px 24px repeat-y;
 }
-
-/* ─── BORDA ARMORIAL (padrão de pássaros) ─── */
-body::before,body::after,#pag-l,#pag-r{
-  content:'';position:fixed;z-index:9999;pointer-events:none;
-  background:var(--K);
+#borda-frame::before,#borda-frame::after{content:none}
+/* Cantos: 4 divs independentes, z-index acima de tudo */
+.bc{
+  position:fixed;width:16px;height:16px;
+  z-index:10001;pointer-events:none;
+  background:#1A0A06 url("data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16' fill='%231A0A06'/%3E%3Cpath d='M8,2 C6.2,4.8 4.8,7.5 5.4,10.2 L8,13.2 L10.6,10.2 C11.2,7.5 9.8,4.8 8,2Z' fill='%23E08A1A' opacity='.88'/%3E%3Ccircle cx='8' cy='1.5' r='1.5' fill='%23E08A1A' opacity='.7'/%3E%3C/svg%3E") center/14px 14px no-repeat;
 }
-body::before{top:0;left:0;right:0;height:var(--BW)}
-body::after{bottom:0;left:0;right:0;height:var(--BW)}
-#pag-l{top:0;bottom:0;left:0;width:var(--BW)}
-#pag-r{top:0;bottom:0;right:0;width:var(--BW)}
+.bc.tl{top:0;left:0}
+.bc.tr{top:0;right:0}
+.bc.bl{bottom:0;left:0}
+.bc.br{bottom:0;right:0}
 
 /* Padrão repetido na borda */
-.bdr-patt{position:fixed;z-index:9999;pointer-events:none;overflow:hidden}
-.bdr-patt.tp{top:0;left:0;right:0;height:var(--BW)}
-.bdr-patt.bt{bottom:0;left:0;right:0;height:var(--BW)}
-.bdr-patt.lt{top:0;bottom:0;left:0;width:var(--BW)}
-.bdr-patt.rt{top:0;bottom:0;right:0;width:var(--BW)}
+
 
 /* ─── REVEAL ─── */
 .rv{opacity:0;transform:translateY(32px);transition:opacity .95s ease,transform .95s ease}
@@ -786,6 +808,33 @@ footer{
 }
 
 /* ─── RESPONSIVE ─── */
+/* ═══ NAV MOBILE ═══ */
+#nav-toggle{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  padding:6px;background:none;border:none;
+}
+#nav-toggle span{
+  display:block;width:22px;height:2px;
+  background:var(--K);transition:all .3s;
+}
+#nav.on #nav-toggle span{background:var(--C)}
+@media(max-width:940px){
+  #nav-toggle{display:flex}
+  .nav-links{
+    display:none;position:fixed;
+    top:var(--BW);left:var(--BW);right:var(--BW);
+    background:rgba(26,10,6,.97);
+    flex-direction:column;gap:0;padding:60px 32px 32px;
+    z-index:400;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{
+    font-size:14px;padding:14px 0;
+    border-bottom:1px solid rgba(245,237,216,.08);
+    color:rgba(245,237,216,.6)!important;letter-spacing:.15em;
+  }
+}
+
 @media(max-width:940px){
   :root{--BW:10px}
   #hero{grid-template-columns:1fr;padding-top:72px}
@@ -800,7 +849,11 @@ footer{
   .chapters{padding:0 28px 72px}
   .cordel-estrofe{grid-template-columns:1fr;gap:24px}
   .cordel-ilus{display:none}
-  .cordel-conteudo,.cordel-capa{padding-left:28px;padding-right:28px;margin-left:14px;margin-right:14px}
+  .cordel-conteudo{padding:0 18px 60px}
+  .cordel-capa{margin:28px 18px;padding:0}
+  .cordel-capa-inner{padding:24px 22px}
+  .cordel-titulo{font-size:clamp(28px,8vw,52px)}
+  .cordel-subtitulo-script{font-size:clamp(32px,9vw,64px)}
   .ent-grid{grid-template-columns:1fr 1fr;padding-left:28px;padding-right:28px}
   .ent-header{padding-left:28px;padding-right:28px}
   .fg{grid-template-columns:1fr;gap:20px}
@@ -811,53 +864,109 @@ footer{
   .ent-grid{grid-template-columns:1fr}
   .hero-title{font-size:54px}.hero-script{font-size:60px}
 }
+
+/* ═══ TEXTURAS POR SEÇÃO ═══ */
+#hero{background-image:url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='20' x2='20' y2='0' stroke='%231A0A06' stroke-width='.6' stroke-opacity='.07'/%3E%3C/svg%3E")}
+#pergunta{background-image:url("data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='8' x2='16' y2='8' stroke='%23F5EDD8' stroke-width='.5' stroke-opacity='.08'/%3E%3Cline x1='8' y1='0' x2='8' y2='16' stroke='%23F5EDD8' stroke-width='.5' stroke-opacity='.08'/%3E%3C/svg%3E")}
+#documentario{background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='.9' fill='%231A0A06' opacity='.07'/%3E%3C/svg%3E")}
+#poesia{background-image:url("data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='14' cy='14' r='1.1' fill='%23F5EDD8' opacity='.07'/%3E%3C/svg%3E")}
+#poetas{background-image:url("data:image/svg+xml,%3Csvg width='22' height='22' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,11 L11,0 L22,11 L11,22Z' fill='none' stroke='%231A0A06' stroke-width='.5' stroke-opacity='.09'/%3E%3C/svg%3E")}
+#podcast{background-image:url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='10' x2='20' y2='10' stroke='%23E08A1A' stroke-width='.6' stroke-opacity='.07'/%3E%3C/svg%3E")}
+#entregaveis{background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,12 L12,0 L24,12 L12,24Z' fill='none' stroke='%23E08A1A' stroke-width='.4' stroke-opacity='.07'/%3E%3C/svg%3E")}
+#progresso{background-image:url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='20' x2='20' y2='0' stroke='%231A0A06' stroke-width='.6' stroke-opacity='.07'/%3E%3C/svg%3E")}
+#apoio{background-image:url("data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='16,4 18,13 27,13 20,18 22,27 16,22 10,27 12,18 5,13 14,13' fill='none' stroke='%231A0A06' stroke-width='.5' stroke-opacity='.055'/%3E%3C/svg%3E")}
+#apoiadores{background-image:url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='0' x2='20' y2='20' stroke='%23E08A1A' stroke-width='.4' stroke-opacity='.06'/%3E%3Cline x1='20' y1='0' x2='0' y2='20' stroke='%23E08A1A' stroke-width='.4' stroke-opacity='.06'/%3E%3C/svg%3E")}
+
+
+/* ═══ TIMELINE — losango + trilha unificados ═══ */
+.tl-wrap{position:relative;margin-bottom:52px}
+.tl-base{position:relative;height:28px;display:flex;align-items:center;margin-bottom:16px}
+.tl-linha{position:absolute;left:0;right:0;height:3px;background:rgba(26,10,6,.15);border-radius:2px}
+.tl-prog-ln{
+  position:absolute;left:0;top:0;height:100%;
+  background:var(--R);border-radius:2px;
+  width:0;transition:width 1.5s cubic-bezier(.4,0,.2,1);
+}
+.tl-pontos{
+  position:absolute;left:0;right:0;top:0;bottom:0;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.tlp{
+  width:22px;height:22px;flex-shrink:0;
+  transform:rotate(45deg);
+  background:var(--A);
+  border:2px solid rgba(26,10,6,.35);
+  transition:all .6s;
+  position:relative;z-index:2;
+}
+.tlp.done{background:var(--R);border-color:var(--R)}
+.tlp.active{
+  background:var(--R);border-color:var(--R);
+  box-shadow:0 0 0 5px rgba(139,34,24,.18),0 0 0 10px rgba(139,34,24,.07);
+  animation:tpa 2.2s ease-in-out infinite;
+}
+@keyframes tpa{
+  0%,100%{box-shadow:0 0 0 4px rgba(139,34,24,.2),0 0 0 8px rgba(139,34,24,.07)}
+  50%{box-shadow:0 0 0 8px rgba(139,34,24,.12),0 0 0 14px rgba(139,34,24,.04)}
+}
+.tl-nomes{display:flex;justify-content:space-between}
+.tln{
+  width:22px;text-align:center;
+  font-family:'IM Fell DW Pica',serif;font-size:10px;
+  letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(26,10,6,.38);white-space:nowrap;
+  transform:translateX(-50%);margin-left:11px;
+}
+.tln:first-child{margin-left:0;transform:none;text-align:left}
+.tln:last-child{transform:none;text-align:right;margin-left:0}
+.tln.done,.tln.active{color:var(--R)}
+.tln.active{color:var(--Km);font-style:italic}
+.tln span{display:block;font-size:9px;color:rgba(26,10,6,.28);margin-top:3px;font-style:italic}
+.tln.active span{color:rgba(26,10,6,.5)}
+
+
+/* ═══ STATUS BOX (fase atual) — corrigido ═══ */
+.tl-status{
+  padding:24px 28px;
+  background:rgba(26,10,6,.88);
+  border-left:4px solid var(--R);
+  border:1px solid rgba(26,10,6,.5);
+  border-left:4px solid var(--R);
+}
+.tls-lbl{color:var(--R)}
+.tl-status p{color:rgba(245,237,216,.78);font-style:italic;line-height:1.7}
+
+/* ═══ LOGOS — creme suave, legíveis ═══ */
+.ap-rouanet{
+  background:rgba(224,138,26,.09);
+  border:1px solid rgba(224,138,26,.22);
+  padding:26px 44px;
+}
+.ap-rouanet img{filter:brightness(0) invert(.9) sepia(.15)}
+.ap-logo-box{
+  background:rgba(224,138,26,.09);
+  border:1px solid rgba(224,138,26,.2);
+  min-width:170px;min-height:80px;
+}
+.ap-logo-box img{filter:brightness(0) invert(.88) sepia(.12)}
+.podcast-logo img{filter:brightness(0) sepia(.4)}
 </style>
 </head>
 <body>
 
-<!-- BORDAS COM PADRÃO ARMORIAL -->
-<div class="bdr-patt tp" style="background:var(--K);z-index:9999">
-<svg style="display:block;width:100%;height:16px" viewBox="0 0 1200 16" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-<rect width="1200" height="16" fill="#1A0A06"/>
-<defs><pattern id="bpt" x="0" y="0" width="24" height="16" patternUnits="userSpaceOnUse">
-<path d="M12,2 C10,5 8,8 9,11 L12,14 L15,11 C16,8 14,5 12,2Z" fill="#E08A1A" opacity=".75"/>
-<circle cx="12" cy="1.5" r="1.5" fill="#E08A1A" opacity=".55"/>
-</pattern></defs>
-<rect width="1200" height="16" fill="url(#bpt)"/>
-</svg>
-</div>
-<div class="bdr-patt bt" style="background:var(--K);z-index:9999">
-<svg style="display:block;width:100%;height:16px" viewBox="0 0 1200 16" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-<rect width="1200" height="16" fill="#1A0A06"/>
-<defs><pattern id="bpb" x="0" y="0" width="24" height="16" patternUnits="userSpaceOnUse">
-<path d="M12,2 C10,5 8,8 9,11 L12,14 L15,11 C16,8 14,5 12,2Z" fill="#E08A1A" opacity=".75"/>
-<circle cx="12" cy="1.5" r="1.5" fill="#E08A1A" opacity=".55"/>
-</pattern></defs>
-<rect width="1200" height="16" fill="url(#bpb)"/>
-</svg>
-</div>
-<div class="bdr-patt lt" style="background:var(--K);z-index:9999">
-<svg style="display:block;width:16px;height:100vh" viewBox="0 0 16 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-<rect width="16" height="800" fill="#1A0A06"/>
-<defs><pattern id="bpl" x="0" y="0" width="16" height="24" patternUnits="userSpaceOnUse">
-<path d="M8,2 C6,5 4,8 5,11 L8,14 L11,11 C12,8 10,5 8,2Z" fill="#E08A1A" opacity=".75"/>
-</pattern></defs>
-<rect width="16" height="800" fill="url(#bpl)"/>
-</svg>
-</div>
-<div class="bdr-patt rt" style="background:var(--K);z-index:9999">
-<svg style="display:block;width:16px;height:100vh" viewBox="0 0 16 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-<rect width="16" height="800" fill="#1A0A06"/>
-<defs><pattern id="bpr" x="0" y="0" width="16" height="24" patternUnits="userSpaceOnUse">
-<path d="M8,2 C6,5 4,8 5,11 L8,14 L11,11 C12,8 10,5 8,2Z" fill="#E08A1A" opacity=".75"/>
-</pattern></defs>
-<rect width="16" height="800" fill="url(#bpr)"/>
-</svg>
-</div>
+<!-- BORDA -->
+<div id="borda-frame"></div>
+<div class="bc tl"></div>
+<div class="bc tr"></div>
+<div class="bc bl"></div>
+<div class="bc br"></div>
+
+
 
 <!-- NAV -->
 <nav id="nav">
   <span class="nav-logo">De nada em nada, tudo.</span>
+  <button id="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
   <ul class="nav-links">
     <li><a href="#cordel">O Cordel</a></li>
     <li><a href="#documentario">O projeto</a></li>
@@ -1033,9 +1142,9 @@ footer{
     <div class="cordel-faixa">Folheto de Cordel — Nordeste Brasileiro</div>
     <div class="cordel-capa-borda">
       <div class="cordel-capa-inner">
-        <span class="cordel-autor">Bourbon Films apresenta:</span>
-        <div class="cordel-titulo">De Nada<br>em Nada,</div>
-        <span class="cordel-subtitulo-script">tudo.</span>
+        <span class="cordel-autor">Patativa do Assaré</span>
+        <div class="cordel-titulo">Cante Lá<br>que eu</div>
+        <span class="cordel-subtitulo-script">Canto Cá</span>
         <!-- ILUSTRAÇÃO DA CAPA: Pássaro armorial emblemático -->
         <div class="cordel-capa-ilus">
           <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
@@ -1065,7 +1174,7 @@ footer{
             <polygon points="225,22 227.5,32 238,32 229.5,38 232.5,48 225,42 217.5,48 220.5,38 212,32 222.5,32" fill="#E08A1A"/>
           </svg>
         </div>
-        <p class="cordel-capa-rodape">Documentário &middot; Websérie &middot; Podcast &middot; E-book &middot; Portal</p>
+        <p class="cordel-capa-rodape">Antônio Gonçalves da Silva<br><em style="font-size:10px;opacity:.6">Assaré, Ceará &middot; 1909&ndash;2002</em></p>
       </div>
     </div>
   </div>
@@ -1107,12 +1216,13 @@ footer{
       </div>
       <div class="cordel-versos rl" id="cv1">
         <span class="num">I.</span>
-        <p>Venham todos me escutar,</p>
-        <p>Que vou contar sem demora,</p>
-        <p>A história que o Nordeste</p>
-        <p>Carrega desde outrora,</p>
-        <p>De poeta em poeta</p>
-        <p>A tradição nunca morre.</p>
+        <p>Repare que a minha vida</p>
+        <p>É deferente da sua,</p>
+        <p>A sua rima polida</p>
+        <p>Nasceu no salão da rua,</p>
+        <p>Já eu sou bem deferente,</p>
+        <p>Meu verso é como a semente</p>
+        <p>Que nasce enriba do chão.</p>
       </div>
     </div>
 
@@ -1156,12 +1266,13 @@ footer{
       </div>
       <div class="cordel-versos rr d1" id="cv2">
         <span class="num">II.</span>
-        <p>O cantador e o repente,</p>
-        <p>O cordel e o cancioneiro,</p>
-        <p>São a alma de um povo</p>
-        <p>Que não precisa dinheiro</p>
-        <p>Pra fazer da sua dor</p>
-        <p>Um verso verdadeiro.</p>
+        <p>Você é munto ditoso,</p>
+        <p>Sabe lê, sabe escreve,</p>
+        <p>Pois vá cantando o seu gozo,</p>
+        <p>Que eu canto meu padece,</p>
+        <p>Inquanto a felicidade</p>
+        <p>Você canta na cidade,</p>
+        <p>Cá no sertão eu infrento.</p>
       </div>
     </div>
 
@@ -1199,12 +1310,13 @@ footer{
       </div>
       <div class="cordel-versos rl d2" id="cv3">
         <span class="num">III.</span>
-        <p>A xilogravura fala</p>
-        <p>O que a voz não consegue,</p>
-        <p>Na madeira o artesão</p>
-        <p>Um universo tece,</p>
-        <p>E o papel que amarela</p>
-        <p>Nunca some, nunca cede.</p>
+        <p>Só canta o sertão dereito,</p>
+        <p>Com tudo quanto ele tem,</p>
+        <p>Quem sempre correu estreito,</p>
+        <p>Sem proteção de ninguém,</p>
+        <p>Coberto de precisão,</p>
+        <p>Suportando a privação</p>
+        <p>Com paciença de Jó.</p>
       </div>
     </div>
 
@@ -1236,16 +1348,25 @@ footer{
       </div>
       <div class="cordel-versos rr d1" id="cv4">
         <span class="num">IV.</span>
-        <p>De nada em nada se faz</p>
-        <p>A poesia mais pura,</p>
-        <p>E de tudo o Nordeste</p>
-        <p>Revela a sua escritura,</p>
-        <p>Num documentário vivo</p>
-        <p>Que vai além da cultura.</p>
+        <p>Amigo, não tenha quêxa,</p>
+        <p>Veja que eu tenho razão:</p>
+        <p>Em lhe dize que não mexa</p>
+        <p>Nas coisa do meu sertão,</p>
+        <p>&mdash; Por favô, não mexa aqui,</p>
+        <p>Que eu também não mêxo aí:</p>
+        <p><em>Cante lá que eu canto cá.</em></p>
       </div>
     </div>
 
-  </div><!-- fim cordel-conteudo -->
+    <div style="text-align:center;padding:36px 0 0;border-top:1px solid rgba(26,10,6,.15);margin-top:8px">
+    <p style="font-family:'IM Fell DW Pica',serif;font-style:italic;font-size:12px;color:rgba(26,10,6,.45);letter-spacing:.14em">
+      Trecho de <strong style="font-style:normal;color:rgba(26,10,6,.65)">Cante Lá Que Eu Canto Cá</strong><br>
+      Patativa do Assaré (Antônio Gonçalves da Silva)<br>
+      Assaré, CE &middot; 1909&ndash;2002 &middot; In: <em>Cante lá que eu canto cá</em>, Ed. Vozes, 1978<br>
+      Reprodução para fins culturais e educativos
+    </p>
+  </div>
+</div><!-- fim cordel-conteudo -->
 </section>
 
 <!-- DIV -->
@@ -1584,20 +1705,24 @@ footer{
       <span class="ey prog-ey rv">Status atual</span>
       <h2 class="h2 rv d1">Em andamento</h2>
       <p class="prog-sub rv d2">Aprovado pelo Ministério da Cultura. Captação de recursos ativa.</p>
-      <div class="tl-track rv d3">
-        <div class="tl-fill" id="tlFill"></div>
-        <div class="tl-dots">
-          <div class="tldot done"></div>
-          <div class="tldot active"></div>
-          <div class="tldot"></div>
-          <div class="tldot"></div>
+      <div class="tl-wrap rv d3">
+        <div class="tl-base">
+          <div class="tl-linha">
+            <div class="tl-prog-ln" id="tlFill"></div>
+          </div>
+          <div class="tl-pontos">
+            <div class="tlp done"></div>
+            <div class="tlp active"></div>
+            <div class="tlp"></div>
+            <div class="tlp"></div>
+          </div>
         </div>
-      </div>
-      <div class="tl-phases rv d3">
-        <div class="tlph done"><span class="tlph-l">Aprovação</span><span class="tlph-s">Lei Rouanet</span></div>
-        <div class="tlph active"><span class="tlph-l">Captação</span><span class="tlph-s">Em andamento</span></div>
-        <div class="tlph"><span class="tlph-l">Produção</span><span class="tlph-s">Rodagem</span></div>
-        <div class="tlph"><span class="tlph-l">Lançamento</span><span class="tlph-s">Festivais</span></div>
+        <div class="tl-nomes">
+          <div class="tln done">Aprovação<span>Lei Rouanet</span></div>
+          <div class="tln active">Captação<span>Em andamento</span></div>
+          <div class="tln">Produção<span>Rodagem</span></div>
+          <div class="tln">Lançamento<span>Festivais</span></div>
+        </div>
       </div>
       <div class="tl-status rv d4">
         <span class="tls-lbl">Fase atual</span>
@@ -1812,11 +1937,15 @@ const cio=new IntersectionObserver(entries=>{
 // TIMELINE
 const tlio=new IntersectionObserver(entries=>{
   if(entries[0].isIntersecting){
-    setTimeout(()=>{document.getElementById('tlFill').style.width='33.3%';},400);
+    setTimeout(()=>{
+      const fill=document.getElementById('tlFill');
+      if(fill) fill.style.width='33.3%';
+    },500);
     tlio.unobserve(entries[0].target);
   }
-},{threshold:0.3});
-tlio.observe(document.getElementById('progresso'));
+},{threshold:0.25});
+const pgEl=document.getElementById('progresso');
+if(pgEl) tlio.observe(pgEl);
 </script>
 </body>
 </html>
