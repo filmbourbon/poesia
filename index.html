@@ -1580,46 +1580,69 @@ footer{
   display:flex;flex-direction:column;
   border:1.5px solid rgba(0,0,0,.35);
   margin:4px;
-  /* Textura papel base */
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.07'/%3E%3C/svg%3E");
+  overflow:hidden;
 }
-/* Manchas e desgaste únicos por posição */
-.cg-card:nth-child(1) .cg-book-inner{background-color:inherit;filter:contrast(1.02)}
-.cg-card:nth-child(2n) .cg-book-inner{
-  background-image:
-    radial-gradient(ellipse 70px 50px at 15% 80%,rgba(90,55,20,.1) 0%,transparent 70%),
-    radial-gradient(circle 25px at 85% 20%,transparent 18px,rgba(90,55,20,.07) 19px,transparent 25px),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.08'/%3E%3C/svg%3E");
-  filter:sepia(.08) contrast(1.03);
+/* Textura de papel velho — pseudo-elemento acima do fundo colorido */
+.cg-book-inner::before{
+  content:'';
+  position:absolute;inset:0;z-index:1;
+  pointer-events:none;
+  mix-blend-mode:multiply;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(90,55,20,.22) 0%,transparent 70%),
+    radial-gradient(circle 28% at 80% 15%, transparent 60%, rgba(90,55,20,.14) 61%,transparent 75%),
+    linear-gradient(to bottom, rgba(0,0,0,.18) 0%, transparent 20%, transparent 80%, rgba(0,0,0,.16) 100%),
+    linear-gradient(to right, rgba(0,0,0,.12) 0%, transparent 18%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.18'/%3E%3C/svg%3E");
 }
-.cg-card:nth-child(3n) .cg-book-inner{
+/* Foxing (oxidação) em cada card */
+.cg-book-inner::after{
+  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  mix-blend-mode:multiply;
   background-image:
-    linear-gradient(to bottom,rgba(100,70,10,.1) 0%,transparent 20%),
-    radial-gradient(ellipse 40px 60px at 80% 65%,rgba(90,55,20,.09) 0%,transparent 70%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.06'/%3E%3C/svg%3E");
-  filter:sepia(.12) brightness(.98);
+    radial-gradient(circle 3px at 15% 35%, rgba(90,55,20,.35) 0%,transparent 100%),
+    radial-gradient(circle 2px at 78% 62%, rgba(90,55,20,.3) 0%,transparent 100%),
+    radial-gradient(circle 2.5px at 42% 85%, rgba(90,55,20,.28) 0%,transparent 100%),
+    radial-gradient(circle 1.8px at 88% 22%, rgba(90,55,20,.32) 0%,transparent 100%),
+    radial-gradient(circle 3px at 30% 70%, rgba(90,55,20,.25) 0%,transparent 100%);
 }
-.cg-card:nth-child(4n) .cg-book-inner{
-  background-image:
-    radial-gradient(circle 30px at 70% 85%,transparent 22px,rgba(90,55,20,.06) 23px,transparent 30px),
-    radial-gradient(ellipse 50px 35px at 25% 30%,rgba(90,55,20,.08) 0%,transparent 70%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.58' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.09'/%3E%3C/svg%3E");
-  filter:sepia(.06) contrast(1.04);
+/* Conteúdo acima das texturas */
+.cg-book-inner > *{position:relative;z-index:3}
+
+.cg-card:nth-child(2n) .cg-book-inner::before{background:
+  radial-gradient(ellipse 55% 35% at 85% 75%, rgba(90,55,20,.2) 0%,transparent 70%),
+  radial-gradient(circle 25% at 12% 18%, transparent 58%, rgba(90,55,20,.12) 59%,transparent 72%),
+  linear-gradient(to top, rgba(0,0,0,.16) 0%, transparent 22%),
+  linear-gradient(to left, rgba(0,0,0,.1) 0%, transparent 18%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.2'/%3E%3C/svg%3E");
 }
-.cg-card:nth-child(5n) .cg-book-inner{
-  background-image:
-    linear-gradient(to right,rgba(100,70,10,.08) 0%,transparent 25%),
-    linear-gradient(to bottom,transparent 70%,rgba(100,70,10,.07) 100%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.07'/%3E%3C/svg%3E");
-  filter:sepia(.15) brightness(.97);
+.cg-card:nth-child(3n) .cg-book-inner::before{background:
+  radial-gradient(ellipse 70% 30% at 50% 95%, rgba(90,55,20,.18) 0%,transparent 70%),
+  radial-gradient(ellipse 30% 60% at 5% 50%, rgba(90,55,20,.16) 0%,transparent 70%),
+  linear-gradient(135deg, rgba(0,0,0,.1) 0%, transparent 30%),
+  linear-gradient(to bottom, rgba(0,0,0,.2) 0%, transparent 25%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.22'/%3E%3C/svg%3E");
 }
-.cg-card:nth-child(7n) .cg-book-inner{
-  background-image:
-    radial-gradient(ellipse 80px 40px at 50% 90%,rgba(90,55,20,.09) 0%,transparent 70%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.1'/%3E%3C/svg%3E");
-  filter:sepia(.2) contrast(1.02);
+.cg-card:nth-child(3n) .cg-book-inner::after{background-image:
+  radial-gradient(circle 2.5px at 88% 45%, rgba(90,55,20,.38) 0%,transparent 100%),
+  radial-gradient(circle 3px at 22% 55%, rgba(90,55,20,.32) 0%,transparent 100%),
+  radial-gradient(circle 1.8px at 60% 18%, rgba(90,55,20,.28) 0%,transparent 100%),
+  radial-gradient(circle 2px at 40% 80%, rgba(90,55,20,.3) 0%,transparent 100%),
+  radial-gradient(circle 3.5px at 75% 88%, rgba(90,55,20,.25) 0%,transparent 100%);}
+.cg-card:nth-child(5n) .cg-book-inner::before{background:
+  radial-gradient(ellipse 50% 50% at 90% 10%, rgba(90,55,20,.2) 0%,transparent 70%),
+  linear-gradient(to bottom, rgba(0,0,0,.22) 0%, transparent 18%, transparent 78%, rgba(0,0,0,.18) 100%),
+  linear-gradient(to right, rgba(0,0,0,.14) 0%, transparent 22%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.16'/%3E%3C/svg%3E");
 }
+.cg-card:nth-child(7n) .cg-book-inner::before{background:
+  radial-gradient(ellipse 65% 45% at 15% 15%, rgba(90,55,20,.18) 0%,transparent 70%),
+  radial-gradient(ellipse 45% 35% at 80% 80%, rgba(90,55,20,.2) 0%,transparent 70%),
+  linear-gradient(45deg, rgba(0,0,0,.1) 0%, transparent 35%),
+  linear-gradient(to bottom, rgba(0,0,0,.16) 0%,transparent 20%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.24'/%3E%3C/svg%3E");
+}
+
 .cg-topo{
   font-family:'IM Fell DW Pica',serif;
   font-size:5.5px;letter-spacing:.2em;text-transform:uppercase;
@@ -1649,10 +1672,16 @@ footer{
 }
 #cg-modal.on{display:flex}
 #cg-modal-box{
-  background:#EDE0BB;
+  background:#D4BC82;
+  background-image:
+    radial-gradient(ellipse 100px 70px at 8% 15%,rgba(90,55,20,.14) 0%,transparent 70%),
+    radial-gradient(circle 42px at 88% 72%,transparent 28px,rgba(90,55,20,.09) 29px,transparent 42px),
+    radial-gradient(ellipse 60px 40px at 75% 10%,rgba(90,55,20,.11) 0%,transparent 70%),
+    linear-gradient(to bottom,rgba(100,70,10,.1) 0%,transparent 16%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+  filter:contrast(1.03) sepia(.08);
   max-width:480px;width:100%;
-  max-height:85vh;
-  overflow-y:auto;
+  max-height:85vh;overflow-y:auto;
   position:relative;
   box-shadow:0 32px 96px rgba(0,0,0,.6);
 }
@@ -1816,6 +1845,203 @@ footer{
   .tp-hd{padding:0 28px}
   .tp-rail-wrap{padding:0 28px}
   .tp-card{width:180px}
+}
+
+
+/* ═══════════════════════════════════════════════════
+   TEXTURA DO MODAL DE CORDEL (galeria)
+═══════════════════════════════════════════════════ */
+#cg-modal-box{
+  background:#D4BC82;
+  background-image:
+    radial-gradient(ellipse 120px 80px at 8% 15%, rgba(90,55,20,.13) 0%,transparent 70%),
+    radial-gradient(circle 45px at 88% 72%, transparent 30px, rgba(90,55,20,.08) 31px, transparent 45px),
+    radial-gradient(ellipse 60px 40px at 75% 12%, rgba(90,55,20,.1) 0%, transparent 70%),
+    linear-gradient(to bottom, rgba(100,70,10,.1) 0%, transparent 15%),
+    linear-gradient(to right, rgba(100,70,10,.08) 0%, transparent 20%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+  filter:contrast(1.03);
+}
+#cg-modal-box::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(circle 2.5px at 15% 38%, rgba(90,55,20,.22) 0%,transparent 100%),
+    radial-gradient(circle 1.8px at 82% 55%, rgba(90,55,20,.18) 0%,transparent 100%),
+    radial-gradient(circle 2px at 44% 80%, rgba(90,55,20,.2) 0%,transparent 100%),
+    radial-gradient(circle 1.5px at 68% 22%, rgba(90,55,20,.15) 0%,transparent 100%),
+    radial-gradient(circle 3px at 28% 65%, rgba(90,55,20,.12) 0%,transparent 100%),
+    radial-gradient(circle 1.8px at 90% 30%, rgba(90,55,20,.16) 0%,transparent 100%),
+    radial-gradient(circle 2.2px at 55% 12%, rgba(90,55,20,.14) 0%,transparent 100%);
+  mix-blend-mode:multiply;
+}
+#cgm-corpo,#cgm-cred{position:relative;z-index:1}
+.cgm-header{position:relative;z-index:2}
+
+/* ═══════════════════════════════════════════════════
+   PATATIVA — PÁGINAS COM TEXTURAS ÚNICAS
+═══════════════════════════════════════════════════ */
+
+/* Textura base de todas as páginas */
+#cordel-sanfona .cp{
+  background-color:#D4BC82;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.09'/%3E%3C/svg%3E");
+}
+
+/* CAPA (página 1) — capa mais desgastada, borra de café em destaque */
+#cordel-sanfona .cp:nth-child(1){
+  background-color:#C8B070;
+  background-image:
+    radial-gradient(ellipse 100px 70px at 75% 18%, rgba(90,55,20,.18) 0%,transparent 70%),
+    radial-gradient(circle 42px at 72% 16%, transparent 28px, rgba(90,55,20,.12) 29px, transparent 42px),
+    linear-gradient(to bottom, rgba(80,50,10,.18) 0%, transparent 22%),
+    linear-gradient(to right, rgba(80,50,10,.14) 0%, transparent 18%),
+    linear-gradient(to left, rgba(80,50,10,.1) 0%, transparent 18%),
+    linear-gradient(160deg, transparent 60%, rgba(80,50,10,.08) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.11'/%3E%3C/svg%3E");
+  filter:sepia(.18) contrast(1.04);
+}
+
+/* PÁGINA 2 (Stanza I) — mancha de água parte inferior, dobra diagonal */
+#cordel-sanfona .cp:nth-child(2){
+  background-color:#D2BC7C;
+  background-image:
+    radial-gradient(ellipse 90px 120px at 12% 88%, rgba(90,55,20,.15) 0%, transparent 70%),
+    radial-gradient(ellipse 60px 80px at 18% 82%, rgba(100,65,25,.1) 0%, transparent 70%),
+    linear-gradient(to bottom, transparent 72%, rgba(90,60,15,.12) 100%),
+    linear-gradient(145deg, transparent 78%, rgba(80,50,10,.07) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.08'/%3E%3C/svg%3E");
+  filter:sepia(.08) brightness(.97);
+}
+
+/* PÁGINA 3 (Stanza II) — borra de café lado direito + foxing denso */
+#cordel-sanfona .cp:nth-child(3){
+  background-color:#D6C080;
+  background-image:
+    radial-gradient(ellipse 70px 90px at 88% 42%, rgba(90,55,20,.16) 0%, transparent 70%),
+    radial-gradient(circle 38px at 84% 40%, transparent 25px, rgba(90,55,20,.1) 26px, transparent 38px),
+    radial-gradient(circle 2px at 22% 55%, rgba(90,55,20,.2) 0%,transparent 100%),
+    radial-gradient(circle 2.5px at 65% 78%, rgba(90,55,20,.18) 0%,transparent 100%),
+    radial-gradient(circle 1.8px at 40% 30%, rgba(90,55,20,.22) 0%,transparent 100%),
+    radial-gradient(circle 3px at 78% 12%, rgba(90,55,20,.14) 0%,transparent 100%),
+    radial-gradient(circle 2px at 10% 88%, rgba(90,55,20,.2) 0%,transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.62' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.1'/%3E%3C/svg%3E");
+  filter:sepia(.14) contrast(1.03);
+}
+
+/* PÁGINA 4 (Stanza III — refrão) — a página mais lida, mais desgastada */
+#cordel-sanfona .cp:nth-child(4){
+  background-color:#C6B46A;
+  background-image:
+    radial-gradient(ellipse 110px 60px at 50% 95%, rgba(90,55,20,.16) 0%, transparent 70%),
+    radial-gradient(ellipse 80px 50px at 5% 50%, rgba(90,55,20,.14) 0%, transparent 70%),
+    radial-gradient(circle 50px at 50% 92%, transparent 35px, rgba(90,55,20,.09) 36px, transparent 50px),
+    linear-gradient(to bottom, rgba(80,50,10,.14) 0%, transparent 18%, transparent 80%, rgba(80,50,10,.16) 100%),
+    linear-gradient(to right, rgba(80,50,10,.1) 0%, transparent 15%),
+    radial-gradient(circle 2.5px at 30% 42%, rgba(90,55,20,.22) 0%,transparent 100%),
+    radial-gradient(circle 2px at 72% 65%, rgba(90,55,20,.2) 0%,transparent 100%),
+    radial-gradient(circle 3px at 15% 20%, rgba(90,55,20,.18) 0%,transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.12'/%3E%3C/svg%3E");
+  filter:sepia(.2) contrast(1.05) brightness(.96);
+}
+
+/* PÁGINA 5 (Stanza IV) — mancha de umidade canto sup. esq, toque leve */
+#cordel-sanfona .cp:nth-child(5){
+  background-color:#D8C27E;
+  background-image:
+    radial-gradient(ellipse 80px 100px at 5% 8%, rgba(90,55,20,.14) 0%, transparent 70%),
+    linear-gradient(to bottom, rgba(100,70,15,.1) 0%, transparent 14%),
+    radial-gradient(circle 1.8px at 88% 44%, rgba(90,55,20,.18) 0%,transparent 100%),
+    radial-gradient(circle 2.5px at 55% 82%, rgba(90,55,20,.15) 0%,transparent 100%),
+    radial-gradient(circle 1.5px at 30% 60%, rgba(90,55,20,.2) 0%,transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.08'/%3E%3C/svg%3E");
+  filter:sepia(.06) brightness(.98);
+}
+
+/* PÁGINA 6 (Stanza V) — duas borras de café sobrepostas + linhas de dobra */
+#cordel-sanfona .cp:nth-child(6){
+  background-color:#CCB872;
+  background-image:
+    radial-gradient(ellipse 65px 80px at 20% 30%, rgba(90,55,20,.15) 0%, transparent 70%),
+    radial-gradient(circle 38px at 18% 28%, transparent 25px, rgba(90,55,20,.09) 26px, transparent 38px),
+    radial-gradient(ellipse 50px 55px at 78% 68%, rgba(90,55,20,.13) 0%, transparent 70%),
+    radial-gradient(circle 30px at 76% 66%, transparent 20px, rgba(90,55,20,.08) 21px, transparent 30px),
+    linear-gradient(to right, transparent 49.5%, rgba(0,0,0,.05) 49.8%, transparent 50.5%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.1'/%3E%3C/svg%3E");
+  filter:sepia(.16) contrast(1.04) brightness(.97);
+}
+
+/* PÁGINA 7 (Stanza VI — refrão final) — muito amarelada, muito usada */
+#cordel-sanfona .cp:nth-child(7){
+  background-color:#C0AC64;
+  background-image:
+    linear-gradient(to bottom, rgba(80,50,10,.2) 0%, transparent 25%, transparent 70%, rgba(80,50,10,.18) 100%),
+    linear-gradient(to right, rgba(80,50,10,.16) 0%, transparent 22%),
+    linear-gradient(to left, rgba(80,50,10,.14) 0%, transparent 22%),
+    radial-gradient(ellipse 90px 60px at 50% 8%, rgba(90,55,20,.14) 0%, transparent 70%),
+    radial-gradient(circle 2px at 20% 50%, rgba(90,55,20,.24) 0%,transparent 100%),
+    radial-gradient(circle 2.5px at 60% 25%, rgba(90,55,20,.2) 0%,transparent 100%),
+    radial-gradient(circle 1.8px at 85% 70%, rgba(90,55,20,.22) 0%,transparent 100%),
+    radial-gradient(circle 3px at 40% 85%, rgba(90,55,20,.16) 0%,transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.76' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.13'/%3E%3C/svg%3E");
+  filter:sepia(.24) contrast(1.06) brightness(.95);
+}
+
+/* PÁGINA 8 (Créditos) — final do folheto, desgaste de décadas */
+#cordel-sanfona .cp:nth-child(8){
+  background-color:#C4AE6C;
+  background-image:
+    radial-gradient(ellipse 110px 90px at 95% 95%, rgba(90,55,20,.2) 0%, transparent 70%),
+    radial-gradient(ellipse 70px 90px at 2% 90%, rgba(90,55,20,.16) 0%, transparent 70%),
+    radial-gradient(circle 55px at 92% 92%, transparent 38px, rgba(90,55,20,.11) 39px, transparent 55px),
+    linear-gradient(to bottom, rgba(80,50,10,.16) 0%, transparent 20%, transparent 75%, rgba(80,50,10,.2) 100%),
+    linear-gradient(135deg, rgba(80,50,10,.06) 0%, transparent 40%),
+    radial-gradient(circle 2.5px at 25% 30%, rgba(90,55,20,.25) 0%,transparent 100%),
+    radial-gradient(circle 2px at 70% 50%, rgba(90,55,20,.2) 0%,transparent 100%),
+    radial-gradient(circle 3.5px at 48% 72%, rgba(90,55,20,.18) 0%,transparent 100%),
+    radial-gradient(circle 2px at 85% 18%, rgba(90,55,20,.22) 0%,transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.12'/%3E%3C/svg%3E");
+  filter:sepia(.28) contrast(1.07) brightness(.94);
+}
+
+/* Foxing (pontos de oxidação) únicos por página */
+#cordel-sanfona .cp:nth-child(1)::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:4;mix-blend-mode:multiply;background-image:radial-gradient(circle 2px at 88% 22%,rgba(100,65,20,.25) 0%,transparent 100%),radial-gradient(circle 1.5px at 12% 78%,rgba(100,65,20,.2) 0%,transparent 100%),radial-gradient(circle 3px at 55% 55%,rgba(100,65,20,.15) 0%,transparent 100%)}
+#cordel-sanfona .cp:nth-child(3)::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:4;mix-blend-mode:multiply;background-image:radial-gradient(circle 2.5px at 22% 44%,rgba(100,65,20,.28) 0%,transparent 100%),radial-gradient(circle 2px at 70% 80%,rgba(100,65,20,.22) 0%,transparent 100%),radial-gradient(circle 1.8px at 48% 15%,rgba(100,65,20,.2) 0%,transparent 100%),radial-gradient(circle 3px at 88% 60%,rgba(100,65,20,.18) 0%,transparent 100%)}
+#cordel-sanfona .cp:nth-child(5)::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:4;mix-blend-mode:multiply;background-image:radial-gradient(circle 2px at 33% 70%,rgba(100,65,20,.24) 0%,transparent 100%),radial-gradient(circle 1.5px at 78% 38%,rgba(100,65,20,.2) 0%,transparent 100%),radial-gradient(circle 2.5px at 60% 90%,rgba(100,65,20,.18) 0%,transparent 100%)}
+#cordel-sanfona .cp:nth-child(7)::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:4;mix-blend-mode:multiply;background-image:radial-gradient(circle 3px at 18% 35%,rgba(100,65,20,.28) 0%,transparent 100%),radial-gradient(circle 2px at 82% 55%,rgba(100,65,20,.25) 0%,transparent 100%),radial-gradient(circle 2.5px at 45% 78%,rgba(100,65,20,.22) 0%,transparent 100%),radial-gradient(circle 1.8px at 65% 18%,rgba(100,65,20,.2) 0%,transparent 100%),radial-gradient(circle 3.5px at 88% 88%,rgba(100,65,20,.18) 0%,transparent 100%)}
+
+
+/* ═══ ZOOM NAS PÁGINAS DO SANFONA (PC) ═══ */
+#cordel-sanfona-wrap{position:relative;overflow:visible!important}
+#cordel-sanfona{overflow:visible!important}
+#cordel-sanfona .cp{
+  cursor:zoom-in;
+  transition:transform .35s ease, box-shadow .35s ease, z-index 0s;
+  position:relative;z-index:1;
+}
+#cordel-sanfona .cp:hover{
+  transform:scale(2.2) !important;
+  transform-origin:top center;
+  z-index:100;
+  box-shadow:0 20px 60px rgba(0,0,0,.7),0 0 0 2px rgba(224,138,26,.3);
+}
+/* Capa sempre visível */
+#cordel-sanfona .cp:first-child:hover{
+  transform-origin:top left;
+}
+#cordel-sanfona .cp:last-child:hover{
+  transform-origin:top right;
+}
+/* Mobile: sem zoom hover */
+@media(max-width:768px){
+  #cordel-sanfona .cp:hover{transform:none!important;z-index:1;box-shadow:none}
+}
+
+
+/* Capa (1ª página) nunca fechada */
+#cordel-sanfona .cp:first-child{
+  transform:scaleX(1)!important;
+  opacity:1!important;
 }
 
 </style>
@@ -2654,7 +2880,7 @@ footer{
       <div id="cordel-sanfona">
 
         <!-- PÁG 0: CAPA -->
-        <div class="cp fechada">
+        <div class="cp">
           <div class="cp-inner">
             <div class="cp-tipo">Literatura de Cordel</div>
             <div class="cp-xilo" style="flex:1"><svg viewBox="0 0 240 165" xmlns="http://www.w3.org/2000/svg" fill="#1A0A06">
@@ -3755,6 +3981,37 @@ function fecharCordelModal(){var m=document.getElementById('cg-modal');if(m)m.st
 document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharCordelModal();});
 
 
+
+
+// Zoom dinâmico nas páginas do sanfona (transform-origin segue cursor)
+(function(){
+  function setupZoom(){
+    var pages=document.querySelectorAll('#cordel-sanfona .cp');
+    if(!pages.length) return;
+    pages.forEach(function(page){
+      page.addEventListener('mousemove',function(e){
+        var rect=page.getBoundingClientRect();
+        var x=((e.clientX-rect.left)/rect.width*100).toFixed(1);
+        var y=((e.clientY-rect.top)/rect.height*100).toFixed(1);
+        page.style.transformOrigin=x+'% '+y+'%';
+      });
+      page.addEventListener('mouseleave',function(){
+        page.style.transformOrigin='top center';
+      });
+    });
+  }
+  // Executar quando o sanfona abrir
+  var origAbrir=window.abrirSanfona;
+  if(typeof origAbrir==='function'){
+    window.abrirSanfona=function(){
+      origAbrir.apply(this,arguments);
+      setTimeout(setupZoom,600);
+    };
+  } else {
+    setTimeout(setupZoom,1000);
+  }
+  document.addEventListener('DOMContentLoaded',setupZoom);
+})();
 
 </script>
 </body>
