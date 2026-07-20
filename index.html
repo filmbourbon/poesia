@@ -1587,61 +1587,56 @@ footer{
   content:'';
   position:absolute;inset:0;z-index:1;
   pointer-events:none;
-  mix-blend-mode:multiply;
+  /* Papel envelhecido: overlay visível em qualquer cor de fundo */
   background:
-    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(90,55,20,.22) 0%,transparent 70%),
-    radial-gradient(circle 28% at 80% 15%, transparent 60%, rgba(90,55,20,.14) 61%,transparent 75%),
-    linear-gradient(to bottom, rgba(0,0,0,.18) 0%, transparent 20%, transparent 80%, rgba(0,0,0,.16) 100%),
-    linear-gradient(to right, rgba(0,0,0,.12) 0%, transparent 18%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.18'/%3E%3C/svg%3E");
+    radial-gradient(ellipse 55% 35% at 18% 85%, rgba(80,45,5,.55) 0%,transparent 65%),
+    radial-gradient(circle 22% at 82% 12%, transparent 55%, rgba(80,45,5,.4) 56%,transparent 68%),
+    linear-gradient(to bottom, rgba(0,0,0,.28) 0%,transparent 22%,transparent 78%,rgba(0,0,0,.25) 100%),
+    linear-gradient(to right, rgba(0,0,0,.22) 0%,transparent 20%),
+    linear-gradient(to left, rgba(0,0,0,.18) 0%,transparent 18%);
+  mix-blend-mode:overlay;
 }
 /* Foxing (oxidação) em cada card */
 .cg-book-inner::after{
   content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
-  mix-blend-mode:multiply;
+  /* Foxing: pontos de oxidação visíveis */
   background-image:
-    radial-gradient(circle 3px at 15% 35%, rgba(90,55,20,.35) 0%,transparent 100%),
-    radial-gradient(circle 2px at 78% 62%, rgba(90,55,20,.3) 0%,transparent 100%),
-    radial-gradient(circle 2.5px at 42% 85%, rgba(90,55,20,.28) 0%,transparent 100%),
-    radial-gradient(circle 1.8px at 88% 22%, rgba(90,55,20,.32) 0%,transparent 100%),
-    radial-gradient(circle 3px at 30% 70%, rgba(90,55,20,.25) 0%,transparent 100%);
+    radial-gradient(circle 5px at 12% 32%, rgba(255,220,150,.6) 0%,transparent 100%),
+    radial-gradient(circle 4px at 82% 65%, rgba(255,220,150,.55) 0%,transparent 100%),
+    radial-gradient(circle 6px at 45% 88%, rgba(255,220,150,.5) 0%,transparent 100%),
+    radial-gradient(circle 4px at 78% 28%, rgba(255,220,150,.58) 0%,transparent 100%),
+    radial-gradient(circle 5px at 28% 68%, rgba(255,220,150,.5) 0%,transparent 100%),
+    radial-gradient(circle 3px at 60% 14%, rgba(255,220,150,.52) 0%,transparent 100%),
+    radial-gradient(circle 4px at 88% 82%, rgba(255,220,150,.45) 0%,transparent 100%);
+  mix-blend-mode:screen;
+  opacity:.35;
 }
 /* Conteúdo acima das texturas */
 .cg-book-inner > *{position:relative;z-index:3}
 
 .cg-card:nth-child(2n) .cg-book-inner::before{background:
-  radial-gradient(ellipse 55% 35% at 85% 75%, rgba(90,55,20,.2) 0%,transparent 70%),
-  radial-gradient(circle 25% at 12% 18%, transparent 58%, rgba(90,55,20,.12) 59%,transparent 72%),
-  linear-gradient(to top, rgba(0,0,0,.16) 0%, transparent 22%),
-  linear-gradient(to left, rgba(0,0,0,.1) 0%, transparent 18%),
-  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.2'/%3E%3C/svg%3E");
-}
+  radial-gradient(ellipse 50% 40% at 88% 82%, rgba(80,45,5,.55) 0%,transparent 65%),
+  radial-gradient(circle 25% at 10% 15%, transparent 52%, rgba(80,45,5,.38) 53%,transparent 66%),
+  linear-gradient(to top, rgba(0,0,0,.28) 0%,transparent 22%),
+  linear-gradient(to left, rgba(0,0,0,.2) 0%,transparent 20%);
+  mix-blend-mode:overlay;}
 .cg-card:nth-child(3n) .cg-book-inner::before{background:
-  radial-gradient(ellipse 70% 30% at 50% 95%, rgba(90,55,20,.18) 0%,transparent 70%),
-  radial-gradient(ellipse 30% 60% at 5% 50%, rgba(90,55,20,.16) 0%,transparent 70%),
-  linear-gradient(135deg, rgba(0,0,0,.1) 0%, transparent 30%),
-  linear-gradient(to bottom, rgba(0,0,0,.2) 0%, transparent 25%),
-  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.22'/%3E%3C/svg%3E");
-}
-.cg-card:nth-child(3n) .cg-book-inner::after{background-image:
-  radial-gradient(circle 2.5px at 88% 45%, rgba(90,55,20,.38) 0%,transparent 100%),
-  radial-gradient(circle 3px at 22% 55%, rgba(90,55,20,.32) 0%,transparent 100%),
-  radial-gradient(circle 1.8px at 60% 18%, rgba(90,55,20,.28) 0%,transparent 100%),
-  radial-gradient(circle 2px at 40% 80%, rgba(90,55,20,.3) 0%,transparent 100%),
-  radial-gradient(circle 3.5px at 75% 88%, rgba(90,55,20,.25) 0%,transparent 100%);}
+  radial-gradient(ellipse 65% 30% at 50% 95%, rgba(80,45,5,.5) 0%,transparent 70%),
+  radial-gradient(ellipse 28% 55% at 4% 50%, rgba(80,45,5,.45) 0%,transparent 70%),
+  linear-gradient(135deg, rgba(0,0,0,.2) 0%,transparent 35%),
+  linear-gradient(to bottom, rgba(0,0,0,.3) 0%,transparent 18%);
+  mix-blend-mode:overlay;}
 .cg-card:nth-child(5n) .cg-book-inner::before{background:
-  radial-gradient(ellipse 50% 50% at 90% 10%, rgba(90,55,20,.2) 0%,transparent 70%),
-  linear-gradient(to bottom, rgba(0,0,0,.22) 0%, transparent 18%, transparent 78%, rgba(0,0,0,.18) 100%),
-  linear-gradient(to right, rgba(0,0,0,.14) 0%, transparent 22%),
-  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.16'/%3E%3C/svg%3E");
-}
+  radial-gradient(ellipse 45% 50% at 92% 8%, rgba(80,45,5,.5) 0%,transparent 70%),
+  linear-gradient(to bottom, rgba(0,0,0,.32) 0%,transparent 20%,transparent 78%,rgba(0,0,0,.28) 100%),
+  linear-gradient(to right, rgba(0,0,0,.22) 0%,transparent 22%);
+  mix-blend-mode:overlay;}
 .cg-card:nth-child(7n) .cg-book-inner::before{background:
-  radial-gradient(ellipse 65% 45% at 15% 15%, rgba(90,55,20,.18) 0%,transparent 70%),
-  radial-gradient(ellipse 45% 35% at 80% 80%, rgba(90,55,20,.2) 0%,transparent 70%),
-  linear-gradient(45deg, rgba(0,0,0,.1) 0%, transparent 35%),
-  linear-gradient(to bottom, rgba(0,0,0,.16) 0%,transparent 20%),
-  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.24'/%3E%3C/svg%3E");
-}
+  radial-gradient(ellipse 60% 42% at 15% 12%, rgba(80,45,5,.48) 0%,transparent 70%),
+  radial-gradient(ellipse 42% 32% at 82% 82%, rgba(80,45,5,.5) 0%,transparent 70%),
+  linear-gradient(45deg, rgba(0,0,0,.18) 0%,transparent 35%),
+  linear-gradient(to bottom, rgba(0,0,0,.26) 0%,transparent 22%);
+  mix-blend-mode:overlay;}
 
 .cg-topo{
   font-family:'IM Fell DW Pica',serif;
@@ -1708,9 +1703,45 @@ footer{
 .cgm-corpo{
   padding:24px;
   font-family:'Special Elite',serif;
-  font-size:13px;color:var(--K);
+  font-size:13px;color:#1A0A06;
   line-height:1.9;
+  /* TEXTURA PAPEL VELHO VISÍVEL */
+  background:#C9B06A;
+  background-image:
+    /* Borra de café principal - oval grande, canto inferior esq */
+    radial-gradient(ellipse 140px 90px at 12% 88%, rgba(80,45,5,.45) 0%, rgba(80,45,5,.2) 40%, transparent 70%),
+    /* Anel de xícara - círculo com borda, canto superior dir */
+    radial-gradient(circle 52px at 88% 12%, transparent 36px, rgba(80,45,5,.3) 37px, rgba(80,45,5,.15) 44px, transparent 52px),
+    /* Mancha de umidade lateral */
+    radial-gradient(ellipse 50px 120px at 95% 55%, rgba(80,45,5,.2) 0%, transparent 70%),
+    /* Amarelamento bordas */
+    linear-gradient(to bottom, rgba(60,35,5,.25) 0%, transparent 12%, transparent 85%, rgba(60,35,5,.22) 100%),
+    linear-gradient(to right, rgba(60,35,5,.2) 0%, transparent 14%),
+    linear-gradient(to left, rgba(60,35,5,.18) 0%, transparent 14%),
+    /* Linha de dobra central */
+    linear-gradient(to right, transparent 49.4%, rgba(0,0,0,.12) 49.7%, transparent 50.6%),
+    /* Grão do papel */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
+  filter:contrast(1.05) sepia(.1);
+  position:relative;
 }
+/* Foxing visível no corpo do modal */
+.cgm-corpo::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle 4px at 8% 22%, rgba(90,50,10,.5) 0%,transparent 100%),
+    radial-gradient(circle 3px at 92% 68%, rgba(90,50,10,.45) 0%,transparent 100%),
+    radial-gradient(circle 5px at 45% 85%, rgba(90,50,10,.4) 0%,transparent 100%),
+    radial-gradient(circle 3px at 78% 30%, rgba(90,50,10,.48) 0%,transparent 100%),
+    radial-gradient(circle 4px at 22% 60%, rgba(90,50,10,.42) 0%,transparent 100%),
+    radial-gradient(circle 2.5px at 60% 15%, rgba(90,50,10,.44) 0%,transparent 100%),
+    radial-gradient(circle 3.5px at 85% 88%, rgba(90,50,10,.38) 0%,transparent 100%),
+    radial-gradient(circle 2px at 35% 42%, rgba(90,50,10,.5) 0%,transparent 100%);
+  mix-blend-mode:multiply;
+  z-index:0;
+}
+/* Texto acima da textura */
+.cgm-corpo > *{position:relative;z-index:1}
 .cgm-corpo p{margin-bottom:0}
 .cgm-sep{
   text-align:center;color:rgba(26,10,6,.3);
@@ -2011,31 +2042,7 @@ footer{
 #cordel-sanfona .cp:nth-child(7)::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:4;mix-blend-mode:multiply;background-image:radial-gradient(circle 3px at 18% 35%,rgba(100,65,20,.28) 0%,transparent 100%),radial-gradient(circle 2px at 82% 55%,rgba(100,65,20,.25) 0%,transparent 100%),radial-gradient(circle 2.5px at 45% 78%,rgba(100,65,20,.22) 0%,transparent 100%),radial-gradient(circle 1.8px at 65% 18%,rgba(100,65,20,.2) 0%,transparent 100%),radial-gradient(circle 3.5px at 88% 88%,rgba(100,65,20,.18) 0%,transparent 100%)}
 
 
-/* ═══ ZOOM NAS PÁGINAS DO SANFONA (PC) ═══ */
-#cordel-sanfona-wrap{position:relative;overflow:visible!important}
-#cordel-sanfona{overflow:visible!important}
-#cordel-sanfona .cp{
-  cursor:zoom-in;
-  transition:transform .35s ease, box-shadow .35s ease, z-index 0s;
-  position:relative;z-index:1;
-}
-#cordel-sanfona .cp:hover{
-  transform:scale(2.2) !important;
-  transform-origin:top center;
-  z-index:100;
-  box-shadow:0 20px 60px rgba(0,0,0,.7),0 0 0 2px rgba(224,138,26,.3);
-}
-/* Capa sempre visível */
-#cordel-sanfona .cp:first-child:hover{
-  transform-origin:top left;
-}
-#cordel-sanfona .cp:last-child:hover{
-  transform-origin:top right;
-}
-/* Mobile: sem zoom hover */
-@media(max-width:768px){
-  #cordel-sanfona .cp:hover{transform:none!important;z-index:1;box-shadow:none}
-}
+
 
 
 /* Capa (1ª página) nunca fechada */
@@ -2044,6 +2051,94 @@ footer{
   opacity:1!important;
 }
 
+
+/* ═══ ZOOM SANFONA: popup via JS ═══ */
+#cordel-sanfona .cp{cursor:zoom-in}
+#cordel-sanfona .cp.zoomed{outline:2px solid rgba(224,138,26,.5)}
+/* Popup de zoom */
+#cp-zoom-popup{
+  position:fixed;
+  z-index:99999;
+  pointer-events:none;
+  box-shadow:0 32px 80px rgba(0,0,0,.75),0 0 0 2px rgba(224,138,26,.4);
+  transition:opacity .2s ease;
+  opacity:0;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:380px;
+  max-height:90vh;
+  overflow:hidden;
+}
+#cp-zoom-popup.visible{opacity:1}
+#cp-zoom-popup .cp-inner{
+  transform:none!important;
+  width:100%;height:100%;
+  background:inherit;
+}
+
+
+/* ── BOURBON MOBILE ── */
+@media(max-width:768px){
+  #bourbon-grid,
+  div[id="bourbon-grid"],
+  #bourbon > div[style*="grid"]{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    padding:0 20px!important;
+    gap:24px!important;
+    text-align:center!important;
+  }
+  #bourbon img{
+    width:200px!important;
+    margin:0 auto!important;
+    display:block!important;
+  }
+  #bourbon h2{font-size:clamp(28px,8vw,42px)!important}
+  #bourbon p{font-size:15px!important}
+
+  /* CORDEL SANFONA MOBILE */
+  #cordel-stage{padding:24px 8px!important}
+  #cordel-capa-card{width:min(240px,75vw)!important}
+  #cordel-capa-card .cp{
+    width:min(240px,75vw)!important;
+    min-height:auto!important;
+  }
+  #cordel-btn{font-size:9px!important;padding:8px 14px!important}
+  #cordel-fechar{font-size:9px!important}
+  #cordel-sanfona-wrap{
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    max-height:none!important;
+    height:auto!important;
+    padding-bottom:8px;
+  }
+  #cordel-sanfona{
+    flex-direction:row!important;
+    transform:none!important;
+    margin-left:0!important;
+    gap:8px!important;
+  }
+  #cordel-sanfona .cp{
+    width:min(240px,80vw)!important;
+    min-height:340px!important;
+    flex-shrink:0!important;
+  }
+  .capa-titulo{font-size:clamp(14px,4vw,20px)!important}
+  .capa-xilo svg{max-height:120px!important}
+  .cp-versos{font-size:12px!important;line-height:1.7!important}
+
+  /* GALERIA CORDEIS MOBILE */
+  .cg-grid{
+    grid-template-columns:repeat(2,1fr)!important;
+    gap:10px!important;
+    padding:0 12px!important;
+  }
+  #cg-modal-box{max-height:90vh!important}
+  .cgm-header{padding:14px 16px!important}
+  .cgm-titulo{font-size:15px!important}
+  #cgm-corpo{padding:16px!important;font-size:12px!important}
+}
 </style>
 </head>
 <body>
@@ -3919,27 +4014,33 @@ function abrirSanfona(){
   var aberto=document.getElementById('cordel-aberto');
   aberto.style.display='flex';
 
+  var pages=document.querySelectorAll('#cordel-sanfona .cp');
+
   if(!isMobile){
-    var pages=document.querySelectorAll('#cordel-sanfona .cp');
     var PW=280;
     var totalW=pages.length*PW;
     var avail=window.innerWidth-(BW*2)-32;
     var scale=Math.min(1,avail/totalW);
     var sanfona=document.getElementById('cordel-sanfona');
     var wrap=document.getElementById('cordel-sanfona-wrap');
+
+    // A capa fica à esquerda do tudo — garantir marginLeft >= 0
+    var scaledW=totalW*scale;
+    var ml=Math.max(0,(avail-scaledW)/2);
     sanfona.style.transform='scale('+scale+')';
     sanfona.style.transformOrigin='top left';
-    var scaledW=totalW*scale;
-    sanfona.style.marginLeft=((avail-scaledW)/2)+'px';
+    sanfona.style.marginLeft=ml+'px';
     wrap.style.height=(400*scale+8)+'px';
-    pages.forEach(function(p,i){
-      setTimeout(function(){p.classList.remove('fechada');},i*60);
-    });
-  } else {
-    var pages=document.querySelectorAll('#cordel-sanfona .cp');
-    pages.forEach(function(p,i){
-      setTimeout(function(){p.classList.remove('fechada');},i*60);
-    });
+  }
+
+  // Capa (index 0): aparece IMEDIATAMENTE, sem delay
+  if(pages[0]) pages[0].classList.remove('fechada');
+
+  // Demais páginas: desdobram em sequência
+  for(var i=1;i<pages.length;i++){
+    (function(el,d){
+      setTimeout(function(){el.classList.remove('fechada');},d);
+    })(pages[i], i*65);
   }
 }
 
@@ -3983,34 +4084,58 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharCordel
 
 
 
-// Zoom dinâmico nas páginas do sanfona (transform-origin segue cursor)
+
+
+
+// ── ZOOM POPUP no Sanfona ──
 (function(){
+  if(window.innerWidth<=768) return; // só no desktop
+  var popup=null;
+
+  function getPopup(){
+    if(!popup){
+      popup=document.createElement('div');
+      popup.id='cp-zoom-popup';
+      popup.style.cssText='position:fixed;z-index:99999;pointer-events:none;display:none;'+
+        'top:50%;left:50%;transform:translate(-50%,-50%);'+
+        'width:420px;max-height:85vh;overflow:hidden;'+
+        'box-shadow:0 40px 100px rgba(0,0,0,.85),0 0 0 3px rgba(224,138,26,.5);'+
+        'transition:opacity .2s;';
+      document.body.appendChild(popup);
+    }
+    return popup;
+  }
+
   function setupZoom(){
     var pages=document.querySelectorAll('#cordel-sanfona .cp');
-    if(!pages.length) return;
     pages.forEach(function(page){
-      page.addEventListener('mousemove',function(e){
-        var rect=page.getBoundingClientRect();
-        var x=((e.clientX-rect.left)/rect.width*100).toFixed(1);
-        var y=((e.clientY-rect.top)/rect.height*100).toFixed(1);
-        page.style.transformOrigin=x+'% '+y+'%';
+      page.addEventListener('mouseenter',function(){
+        var p=getPopup();
+        // Clonar apenas o .cp-inner para evitar SVGs pesados da capa
+        var inner=page.querySelector('.cp-inner');
+        if(!inner) return;
+        p.innerHTML='';
+        var clone=inner.cloneNode(true);
+        clone.style.cssText='padding:28px;font-size:18px;line-height:2;'+
+          'background:'+window.getComputedStyle(page).backgroundColor+';'+
+          'background-image:'+window.getComputedStyle(page).backgroundImage+';'+
+          'filter:'+window.getComputedStyle(page).filter+';'+
+          'min-height:400px;';
+        p.appendChild(clone);
+        p.style.display='block';
+        p.style.opacity='1';
       });
       page.addEventListener('mouseleave',function(){
-        page.style.transformOrigin='top center';
+        if(popup){ popup.style.opacity='0'; setTimeout(function(){if(popup)popup.style.display='none';},220); }
       });
     });
   }
-  // Executar quando o sanfona abrir
+
   var origAbrir=window.abrirSanfona;
-  if(typeof origAbrir==='function'){
-    window.abrirSanfona=function(){
-      origAbrir.apply(this,arguments);
-      setTimeout(setupZoom,600);
-    };
-  } else {
-    setTimeout(setupZoom,1000);
-  }
-  document.addEventListener('DOMContentLoaded',setupZoom);
+  window.abrirSanfona=function(){
+    if(origAbrir) origAbrir.apply(this,arguments);
+    setTimeout(setupZoom,800);
+  };
 })();
 
 </script>
