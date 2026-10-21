@@ -1,132 +1,104 @@
-# AGENTS.md — De nada em nada, tudo.
+# AGENTS.md · De nada em nada, tudo.
 
-Projeto: Documentário sobre poesia nordestina  
-PRONAC 258413 · Bourbon Films  
-Repositório: https://github.com/filmbourbon/poesia  
-Site: https://www.poesia.art.br
+Documentário sobre a poesia nordestina. Bourbon Films. Lei Rouanet, PRONAC 258413.
+Site: https://www.poesia.art.br · Repositório: https://github.com/filmbourbon/poesia
+Hospedagem: GitHub Pages, branch `main`, raiz do repositório. Sem build, sem framework, sem npm.
 
----
-
-## Estrutura do projeto
+## Estrutura
 
 ```
-poesia-main/
-├── index.html      # Arquivo único — todo o site (HTML + CSS + JS + SVGs inline)
-├── CNAME           # www.poesia.art.br
-└── AGENTS.md       # Este arquivo
+index.html              página única (HTML semântico, todo o texto é texto real)
+assets/css/site.css     sistema visual completo (tokens no :root)
+assets/js/boot.js       1 linha: adiciona html.js antes da pintura
+assets/js/site.js       comportamento (sem dependências)
+assets/fonts/           Alfa Slab One, Alegreya, Caveat (woff2, licença OFL incluída)
+assets/img/             selos MinC e Lei de Incentivo, logos Bourbon, Podcast Nordestino, Fazenda Coruja
+og-image.png / .svg     imagem de compartilhamento (1200x630)
+CNAME                   www.poesia.art.br  (NUNCA apagar)
+tests/                  test_estrutura.py (sem navegador) e test_navegador.py (Playwright)
 ```
 
-O site é hospedado via **GitHub Pages** como arquivo HTML único monolítico.  
-Não há build step, bundler, framework, nem dependências npm.  
-Fontes carregadas via Google Fonts. Sem CDN externo além do YouTube embed.
+## Direção de arte
 
----
+- Conceito: a palavra vira imagem, a imagem vira movimento, o movimento revela uma história.
+- Objeto condutor: **a folha e o cordão**. Cordel = folheto pendurado em cordão de feira.
+  Aparece como: cordão da abertura, barra de progresso no topo, etiquetas de capítulo,
+  cena da dobra (capítulo 6) e varal do acervo (capítulo 7).
+- Gancho narrativo (estrutura Vox): a pergunta do mote aparece no capítulo 2 e a resposta
+  ("De nada em nada, tudo.") fecha a página em `#fim`.
+- Linguagem principal: colagem editorial (recortes de papel, fita adesiva, meio-tom,
+  anotações à mão em urucum, diagramas abstratos). Diorama de papel só no capítulo 6.
+- Referência de estilo: skill `vox-motion-graphics` (Mixed Media + Paper Diorama), adaptada
+  para web: sem vídeo gerado, sem texto em imagem, sem rolagem sequestrada.
 
-## Decisões de arquitetura
-
-| Decisão | Motivo |
+### Tokens
+| Token | Uso |
 |---|---|
-| HTML monolítico | GitHub Pages estático; zero configuração de deploy |
-| CSS/JS inline | Sem latência de requisições extras; funciona offline |
-| Imagens em base64 | Logo Bourbon Films (~140 KB) embutida; sem requisição extra |
-| Sem framework JS | Vanilla JS; mínimo de KBs; sem dependências |
+| `--papel` #E9E4D6 | fundo padrão (papel jornal) |
+| `--tinta` #1B1714 | texto e campos escuros |
+| `--amarelo` #ECBC2C | abertura e apoio (capa de folheto), destaque em campos escuros |
+| `--anil` #24318A | capítulo da voz |
+| `--urucum` #B8361F | SOMENTE anotações à mão, carimbos, foco e progresso |
+| `--rosa`, `--verde`, `--anil-claro` | SOMENTE capas de folheto e esquemas de rima |
+| `--sepia` #D6C6A0 | SOMENTE o diorama do capítulo 6 |
 
----
+### Tipografia
+- `--f-slab` Alfa Slab One: título, títulos de capítulo, declarações curtas.
+- `--f-text` Alegreya: texto corrido e poesia (preservar quebras de verso: um `<span>` por verso).
+- `--f-mao` Caveat: anotações curtas à mão (no máximo uma por tela). Nunca para informação essencial.
+- Não usar caixa-alta em rótulos. Não usar travessão.
 
-## Funções JavaScript críticas
+### Movimento (tempos em :root)
+`--t-ja` 120ms botões · `--t-ui` 240ms componentes · `--t-revela` 650ms revelações · `--t-cena` 900ms cenas.
+Uma única sequência orquestrada na abertura (CSS). No resto, só revelações pontuais.
+`prefers-reduced-motion` desliga tudo. Sem `html.js`, nada fica escondido.
 
-```js
-abrirCordel(id)         // Abre modal do cordel — busca id em CORDEIS_DB
-fecharCordelModal()     // Fecha modal, restaura foco e scroll
-abrirSanfona(el)        // Não utilizado atualmente (legado)
-fecharSanfona(el)       // Não utilizado atualmente (legado)
-```
+## Comportamentos (assets/js/site.js)
+| Módulo | O que faz |
+|---|---|
+| topo | cabeçalho sólido após rolar + barra de progresso |
+| indice | `<dialog id="indice">` com os capítulos; atualiza a URL (voltar funciona) |
+| revela | adiciona `.on` em `.rv .kin .traco .forma .quem-lista .alcance` (IntersectionObserver + varredura na rolagem para rolagem rápida) |
+| anatomia | botões Rimas/Sílabas no capítulo 5 (`aria-pressed`) |
+| dobra | cena fixa do capítulo 6, guiada por `.passo[data-passo]` |
+| paginas | folheto Cante lá: rolagem horizontal nativa + botões |
+| leitor | acervo: `<dialog id="leitor">` lê o conteúdo de `article#txt-<id>` |
+| vozes | filtro por tradição |
+| video | só cria o iframe (youtube-nocookie) quando a pessoa toca |
 
-### CORDEIS_DB
-Objeto JS com 20 entradas. Cada chave corresponde exatamente ao `data-id` de um `.cg-card`.  
-Se adicionar um card novo, adicionar entrada correspondente em CORDEIS_DB.
+## Acervo de cordéis
+Cada folheto tem dois pedaços no `index.html`:
+1. Capa no varal: `<a class="folheto" href="#txt-ID" data-cordel="ID">`.
+2. Texto: `<article class="texto-cordel" id="txt-ID" data-titulo data-autor data-ano data-cor data-verificado>`.
+Sem JS, o link leva ao texto na própria página (`:target`). Com JS, abre o leitor.
 
-### Accordion (#tipos)
-Classe `tp-active` no `.tp-item` controla expansão.  
-**Atenção**: NÃO usar classe `on` para accordion — conflita com IntersectionObserver  
-(que adiciona `.on` nos elementos `.rv`, `.rl`, `.rr`, `.rs` ao revelar).
+**Atenção editorial:** só `cante-la` está conferido. Os outros 19 trechos vieram do site
+anterior e não correspondem com segurança aos textos originais (exemplo: A Triste Partida).
+Estão marcados `data-verificado="nao"`, com selo "provisório" e aviso no leitor.
+Ao conferir um trecho com a edição impressa: troque os versos, mude para
+`data-verificado="sim"`, apague o `<p class="aviso-provisorio">` e o `<span class="selo">`.
 
----
-
-## Acessibilidade (WCAG 2.2 AA)
-
-- Skip nav link: `<a class="skip-nav" href="#hero">`
-- Modal: foco trapped dentro do `#cg-modal`; Escape fecha; foco retorna ao opener
-- Accordions: `role="button"` + `tabindex="0"` + `aria-expanded` + Enter/Space
-- Cards de cordel: `role="button"` + `tabindex="0"` + Enter/Space
-- prefers-reduced-motion: todas animações desabilitadas via CSS media query
-- Alvos de toque: mínimo 44×44 px
-
----
+## Conteúdo corrigido em relação ao site anterior
+- Rogaciano Leite: nasceu em Itapetim, PE (Diário do Nordeste, centenário). O site antigo dizia Assaré/Caruaru.
+- Formas poéticas: galope à beira-mar tem 11 sílabas; quadrão tem 8 versos de 7 sílabas;
+  mourão é forma dialogada entre dois cantadores. Exemplos de estrofes inventados foram retirados
+  e substituídos por diagramas do esquema de rimas.
+- O site anterior tinha erro de sintaxe JS nos `onclick` (`\'`): os cordéis e os tipos de poesia não abriam.
 
 ## Segurança
+- CSP no `<head>`: scripts só do próprio site; iframe só do youtube-nocookie; imagens externas só i.ytimg.com.
+- Sem scripts inline, sem `onclick` no HTML. Se precisar de comportamento, adicione em `site.js`.
+- Links externos com `rel="noopener noreferrer"`.
 
-- `rel="noopener noreferrer"` em todos os `target="_blank"`
-- Sem inputs de usuário; sem backend; sem localStorage com dados sensíveis
-- Canonical URL: `https://www.poesia.art.br` (CNAME: `www.poesia.art.br`)
-
----
-
-## Como editar
-
-### Alterar texto de uma seção
-Editar `index.html` diretamente. Seções por ID: `#hero`, `#porque`, `#senhores`,  
-`#poesia`, `#tipos`, `#cordel`, `#cordeis-galeria`, `#podcast`, `#entregaveis`,  
-`#progresso`, `#apoio`, `#bourbon`, `#apoiadores`.
-
-### Adicionar um cordel à galeria
-1. Adicionar entrada em `CORDEIS_DB` no bloco `<script>` (final do body)
-2. Adicionar `<div class="cg-card rv" role="button" tabindex="0" onclick="_modalOpener=this;abrirCordel('SEU_ID')">`
-
-### Modificar estilos
-Todo o CSS está no único `<style>` no `<head>`. Variáveis CSS em `:root`:
-- `--K`: preto (#1A0A06)
-- `--C`: creme (#F5EDD8)
-- `--Alt`: âmbar (#E08A1A)
-- `--Km`: marrom escuro (#2A1208)
-
----
-
-## Deploy
-
-Push para `main` do repositório `filmbourbon/poesia` → GitHub Pages publica automaticamente.  
-Sem CI/CD adicional configurado.
-
-### Verificar após deploy
+## Testes
 ```
-curl -I https://www.poesia.art.br
-# Deve retornar 200 com Content-Type: text/html
+python3 tests/test_estrutura.py      # rápido, sem dependências
+pip install playwright && python -m playwright install chromium
+python3 tests/test_navegador.py      # navegador real: 10 larguras, acervo, teclado, sem JS, movimento reduzido
 ```
 
----
+## Publicar
+Envie para `main` (upload pelo site do GitHub ou git push). O GitHub Pages publica sozinho em 1 a 3 minutos.
+Nunca apague `CNAME`. Ver README.md para o passo a passo.
 
-## Testes manuais obrigatórios após mudanças
-
-- [ ] Modal abre ao clicar em card da galeria (desktop + mobile)
-- [ ] Modal fecha com botão ✕, clique no overlay e tecla Escape
-- [ ] Foco retorna ao card após fechar modal
-- [ ] Accordions de #tipos abrem/fecham com click, Enter e Space
-- [ ] Scroll do site não trava após fechar modal
-- [ ] Navegação por teclado: Tab percorre todos os elementos interativos
-- [ ] Skip nav aparece ao focar via teclado
-- [ ] Animações de reveal funcionam ao scroll
-- [ ] Site responsivo em 375px (iPhone SE) e 390px (iPhone 14)
-
----
-
-## Pendências conhecidas
-
-- Playwright / testes automatizados: não implementados (arquivo HTML monolítico  
-  com assets inline; setup requer servidor local + instância Chromium)
-- Imagens dos cordéis: placeholders com SVG. URLs reais de imagens não configuradas.
-- Video embed #senhores: URL `qshEZpJTwwE` deve ser atualizada quando vídeo final for publicado.
-
----
-
-*Bourbon Films · Campina Grande, PB*  
-*Atualizado em outubro/2026*
+*Bourbon Films · Campina Grande, PB · outubro de 2026*
