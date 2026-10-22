@@ -9,7 +9,7 @@
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#ECBC2C">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://i.ytimg.com; font-src 'self'; frame-src https://www.youtube-nocookie.com; connect-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://i.ytimg.com https://lh3.googleusercontent.com; font-src 'self'; frame-src https://www.youtube-nocookie.com https://*.firebaseapp.com https://www.google.com https://accounts.google.com; connect-src 'self' https://*.googleapis.com https://*.cloudfunctions.net https://*.run.app https://www.google.com; script-src-elem 'self' https://www.google.com https://www.gstatic.com https://apis.google.com; base-uri 'self'; form-action 'none'; object-src 'none'">
 <link rel="canonical" href="https://www.poesia.art.br/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.poesia.art.br/">
@@ -33,6 +33,8 @@
 <link rel="stylesheet" href="assets/css/site.css">
 <script src="assets/js/boot.js"></script>
 <script src="assets/js/site.js" defer></script>
+<script src="assets/js/carta-config.js" defer></script>
+<script src="assets/js/carta.js" defer></script>
 </head>
 <body>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -67,7 +69,8 @@
         <li><a href="#filme"><span>9</span>O filme</a></li>
         <li><a href="#desdobramentos"><span>10</span>O que o projeto entrega</a></li>
         <li><a href="#apoie"><span>11</span>Apoie</a></li>
-        <li><a href="#fim"><span>12</span>A resposta</a></li>
+        <li><a href="#carta"><span>12</span>Carta da poesia</a></li>
+        <li><a href="#fim"><span>13</span>A resposta</a></li>
       </ol>
     </nav>
   </div>
@@ -481,17 +484,14 @@
     </ul>
 
     <div class="parceria">
-      <div>
+      <div class="parceria-texto">
         <p class="mao">parceria estratégica</p>
-        <h3 class="h2">Podcast Nordestino</h3>
-        <p>O maior canal de conversa sobre o Nordeste na internet vai exibir o documentário na íntegra, seguido de debate ao vivo com poetas convidados. Não é patrocínio. É um palco com audiência real.</p>
-        <div class="parceria-logo"><img src="assets/img/podcast-nordestino.png" alt="" width="76" height="48" loading="lazy">Podcast Nordestino</div>
+        <h3 class="h2">Um palco para o filme no Podcast Nordestino.</h3>
+        <p>O lançamento do documentário está previsto com uma transmissão especial no Podcast Nordestino, canal de conversa sobre o Nordeste, com debate ao vivo com poetas convidados.</p>
       </div>
-      <figure class="alcance" aria-label="Audiência do Podcast Nordestino: 2 milhões no TikTok, 800 mil no Instagram, 130 mil no YouTube.">
-        <div class="alcance-linha"><b>2M</b><div class="alcance-barra" style="--v:2"><i></i><span>TikTok</span></div></div>
-        <div class="alcance-linha"><b>800k</b><div class="alcance-barra" style="--v:.8"><i></i><span>Instagram</span></div></div>
-        <div class="alcance-linha curta"><b>130k</b><div class="alcance-barra" style="--v:.13"><i></i><span>YouTube</span></div></div>
-        <figcaption class="legenda" style="margin-top:6px">Seguidores informados pelo parceiro.</figcaption>
+      <figure class="parceria-marca">
+        <img src="assets/img/logos/podcast-nordestino.png" alt="Podcast Nordestino" width="520" height="319" loading="lazy">
+        <figcaption><b>800 mil +</b><span>seguidores somando YouTube, Instagram e TikTok, segundo o parceiro.</span></figcaption>
       </figure>
     </div>
   </div>
@@ -530,6 +530,52 @@
   </div>
 </section>
 
+<!-- ================= 12 CARTA DA POESIA ================= -->
+<section class="cap carta" id="carta" aria-labelledby="carta-h">
+  <div class="miolo">
+    <div class="etiqueta" aria-hidden="true"><span class="etiqueta-papel"><span class="etiqueta-n">12</span><span class="etiqueta-t">Carta da poesia</span></span></div>
+    <div class="carta-grade">
+      <div class="carta-intro">
+        <h2 class="h2" id="carta-h">A poesia continua por correspondência.</h2>
+        <p class="lead">Receba novidades do documentário, histórias de poetas e descobertas da poesia nordestina.</p>
+        <p class="legenda">Sem frequência fixa: escrevemos quando houver o que contar. Uma única lista, para o filme e para a poesia.</p>
+      </div>
+      <form class="carta-folha" id="carta-form" novalidate data-estado="inativo" aria-describedby="carta-aviso">
+        <span class="carta-selo" aria-hidden="true"><b>Carta da poesia</b><i>Campina Grande, PB</i></span>
+        <p class="carta-aviso" id="carta-aviso" role="status">A Carta da poesia ainda não está recebendo inscrições. Volte em breve.</p>
+        <div class="carta-email">
+          <label for="carta-email">Seu melhor e-mail</label>
+          <input id="carta-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" disabled>
+          <span class="carta-isca" aria-hidden="true"><label for="carta-site">Não preencha este campo</label><input id="carta-site" name="site" type="text" tabindex="-1" autocomplete="off"></span>
+        </div>
+        <label class="carta-consente">
+          <input type="checkbox" name="consentimento" id="carta-consente" disabled>
+          <span>Quero receber a Carta da poesia por e-mail. Li a <a href="privacidade/">política de privacidade</a>.</span>
+        </label>
+        <button class="btn" type="submit" id="carta-enviar" disabled>Quero receber</button>
+        <p class="carta-ou" aria-hidden="true"><span>ou</span></p>
+        <button class="btn-google" type="button" id="carta-google" disabled>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          <span>Continuar com Google</span>
+        </button>
+        <div class="carta-google-confirma" id="carta-google-confirma" hidden>
+          <p>Você entrou como <b id="carta-google-email"></b>. Entrar com o Google não inscreve ninguém: confirme abaixo se quer receber.</p>
+          <label class="carta-consente">
+            <input type="checkbox" id="carta-consente-google">
+            <span>Quero receber a Carta da poesia neste e-mail. Li a <a href="privacidade/">política de privacidade</a>.</span>
+          </label>
+          <div class="carta-google-acoes">
+            <button class="btn" type="button" id="carta-google-sim">Confirmar inscrição</button>
+            <button class="btn vazado" type="button" id="carta-google-nao">Agora não</button>
+          </div>
+        </div>
+        <p class="carta-status" id="carta-status" aria-live="polite"></p>
+        <p class="carta-rodape">Você pode cancelar quando quiser, pelo link presente em cada carta.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ================= FIM ================= -->
 <section class="campo-tinta" id="fim" aria-labelledby="fim-h">
   <div class="miolo fim">
@@ -537,30 +583,42 @@
     <h2 class="resposta" id="fim-h"><span class="r1">De nada</span><span class="r2">em nada,</span><span class="r3">tudo.</span></h2>
   </div>
   <div class="miolo realizacao">
-    <div class="realizacao-grade">
-      <div>
-        <img class="bourbon" src="assets/img/bourbon-films.png" alt="Bourbon Films" width="640" height="147" loading="lazy">
-        <p>Uma realização Bourbon Films, produtora audiovisual de Campina Grande, na Paraíba. Com dois projetos aprovados pela Lei Rouanet, trabalha com documentário, vídeo institucional e comunicação cultural.</p>
+    <div class="colofao">
+      <div class="colofao-producao">
+        <p class="colofao-rotulo">Produção</p>
+        <img class="marca marca-bourbon" src="assets/img/logos/bourbon-films.png" alt="Bourbon Films" width="798" height="183" loading="lazy">
+        <p>Produtora audiovisual de Campina Grande, na Paraíba. Documentário, vídeo institucional e comunicação cultural.</p>
+      </div>
+      <div class="colofao-parceria">
+        <p class="colofao-rotulo">Parceria de lançamento</p>
+        <img class="marca marca-podcast" src="assets/img/logos/podcast-nordestino.png" alt="Podcast Nordestino" width="520" height="319" loading="lazy">
       </div>
       <div class="links">
         <a href="mailto:bourbonfilms@gmail.com">bourbonfilms@gmail.com <small>e-mail</small></a>
         <a href="tel:+5583998683878">(83) 99868-3878 <small>telefone</small></a>
         <a href="https://instagram.com/bourbonfilm" target="_blank" rel="noopener noreferrer">@bourbonfilm <small>Instagram</small></a>
         <a href="https://bourbonfilms.com.br" target="_blank" rel="noopener noreferrer">bourbonfilms.com.br <small>site</small></a>
+        <a href="#carta">Carta da poesia <small>newsletter</small></a>
       </div>
     </div>
-    <div class="selos">
-      <img class="lei" src="assets/img/lei-incentivo.png" alt="Lei de Incentivo à Cultura, Lei Rouanet" width="360" height="184" loading="lazy">
-      <img class="minc" src="assets/img/minc.png" alt="Ministério da Cultura, Governo do Brasil" width="820" height="195" loading="lazy">
-    </div>
-    <div class="parceiros">
-      <span>Apoio:</span>
-      <img src="assets/img/fazenda-coruja.png" alt="Fazenda Coruja" width="56" height="60" loading="lazy">
-      <img src="assets/img/podcast-nordestino.png" alt="Podcast Nordestino" width="76" height="48" loading="lazy">
-    </div>
+    <figure class="contracapa" aria-labelledby="contracapa-legenda">
+      <figcaption class="sr" id="contracapa-legenda">Bloco de marcas do projeto: Lei de Incentivo à Cultura; apoio Fazenda Coruja; realização Ministério da Cultura e Governo do Brasil.</figcaption>
+      <span class="contracapa-pregador" aria-hidden="true"></span><span class="contracapa-pregador dir" aria-hidden="true"></span>
+      <div class="cc-grupo cc-lei">
+        <img class="marca marca-lei" src="assets/img/logos/lei-incentivo.png" alt="Lei de Incentivo à Cultura, Lei Rouanet" width="646" height="330" loading="lazy">
+      </div>
+      <div class="cc-grupo">
+        <p class="cc-rotulo">Apoio</p>
+        <img class="marca marca-coruja" src="assets/img/logos/fazenda-coruja.png" alt="Fazenda Coruja, queijos artesanais" width="338" height="360" loading="lazy">
+      </div>
+      <div class="cc-grupo cc-gov">
+        <p class="cc-rotulo">Realização</p>
+        <img class="marca marca-gov" src="assets/img/logos/minc-govbr.png" alt="Ministério da Cultura, Governo do Brasil" width="1200" height="285" loading="lazy">
+      </div>
+    </figure>
   </div>
   <footer class="miolo rodape">
-    <span>Projeto cultural aprovado pela Lei Rouanet. Ministério da Cultura do Brasil. PRONAC 258413.</span>
+    <span>Projeto cultural aprovado pela Lei Rouanet. Ministério da Cultura do Brasil. PRONAC 258413. <a href="privacidade/">Privacidade</a></span>
     <span>Bourbon Films © 2026</span>
   </footer>
 </section>
