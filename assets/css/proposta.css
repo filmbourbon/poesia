@@ -1,6 +1,6 @@
 /* Página reservada de proposta (parceria-redecompras/).
-   Usa tokens e componentes de site.css (contracapa, marca-lei, marca-gov, pregador, etiqueta).
-   Marcas ficam em etiquetas de papel penduradas ou na contracapa; nada de cartões iguais. */
+   Usa tokens e componentes de site.css (creditos, marca-lei, marca-gov, pregador, etiqueta).
+   Marcas ficam em etiquetas de papel penduradas ou na creditos; nada de cartões iguais. */
 
 .p-selo{font-style:italic;font-size:.95rem;color:var(--cinza);white-space:nowrap;margin-right:4px}
 @media (max-width:640px){.p-selo{display:none}}
@@ -28,6 +28,8 @@
   .p-pendura-filme{grid-row:1/3;width:clamp(104px,30vw,170px)}
   .p-pendura-marca{margin-top:20px;padding:16px 14px 12px}
   .p-pendura-ludi{margin-top:4px}
+  .p-varal .p-pendura{justify-self:start}
+  .p-status{font-size:.85rem}
   .p-etiqueta img{height:calc(var(--lh) * .6)}
   .p-abertura-texto{grid-row:3;margin-top:32px}
 }
@@ -72,10 +74,11 @@
 }
 .p-qualifica{margin:20px 0 0;padding:14px 16px;border-left:4px solid var(--urucum);background:var(--folha);font-size:1rem;line-height:1.45;max-width:66ch}
 
-/* simulação nos créditos: mesma contracapa do rodapé do site, com contorno tracejado de "rascunho" */
+/* simulação nos créditos: mesma creditos do rodapé do site, com contorno tracejado de "rascunho" */
 .simulacao{margin:clamp(48px,7vw,80px) 0 0}
-.contracapa-sim{margin-top:0;outline:2px dashed var(--urucum);outline-offset:8px}
-.cc-patrocinio .marca-cliente{height:var(--lh);width:auto;max-width:100%}
+.creditos-sim{margin-top:0;outline:2px dashed var(--urucum);outline-offset:8px}
+.cc-patrocinio .marca-cliente{width:200px;height:auto;max-width:100%}
+@media (max-width:760px){.cc-patrocinio .marca-cliente{width:184px}}
 .p-sim-rotulo{margin-top:20px;font-family:var(--f-mao);font-weight:600;font-size:1.3rem;color:var(--urucum);line-height:1.1}
 
 /* 4 LudiLand: área com a paleta do próprio LudiLand */

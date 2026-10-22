@@ -652,7 +652,7 @@ html.js .traco.on path{stroke-dashoffset:0}
 .parceria-marca span{font-style:italic;color:rgba(245,241,230,.75);max-width:34ch}
 @media (max-width:860px){.parceria{grid-template-columns:1fr}}
 
-/* Rodapé: colofão (sobre tinta) + contracapa (folha branca única para o bloco institucional) */
+/* Rodapé: colofão (sobre tinta) + creditos (folha branca única para o bloco institucional) */
 .realizacao{border-top:1px solid rgba(245,241,230,.2);padding-block:clamp(48px,7vw,80px)}
 .colofao{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
 .colofao-rotulo,.cc-rotulo{margin:0 0 14px;font-style:italic;font-size:.95rem;line-height:1.2}
@@ -662,19 +662,23 @@ html.js .traco.on path{stroke-dashoffset:0}
 .marca-podcast{width:clamp(150px,15vw,200px)}
 @media (max-width:860px){.colofao{grid-template-columns:1fr 1fr}.colofao .links{grid-column:1/-1}}
 @media (max-width:480px){.colofao{grid-template-columns:1fr}}
-.contracapa{position:relative;margin:clamp(40px,6vw,64px) 0 0;background:#fff;color:var(--tinta);display:flex;flex-wrap:wrap;align-items:flex-end;gap:28px clamp(28px,4vw,56px);padding:clamp(28px,4vw,40px) clamp(24px,4vw,48px) clamp(24px,3vw,32px);box-shadow:0 18px 30px -20px rgba(0,0,0,.7)}
-.contracapa-pregador{position:absolute;top:-14px;left:18%;width:14px;height:32px;background:var(--madeira);border-radius:2px;box-shadow:inset -4px 0 0 rgba(0,0,0,.18)}
-.contracapa-pregador.dir{left:auto;right:18%}
-.cc-grupo{display:flex;flex-direction:column;justify-content:flex-end}
-.cc-grupo + .cc-grupo{padding-left:clamp(28px,4vw,56px);border-left:1px solid rgba(27,23,20,.15)}
+.creditos{position:relative;margin:clamp(40px,6vw,64px) 0 0;background:#fff;color:var(--tinta);display:grid;grid-auto-flow:column;grid-auto-columns:auto;justify-content:center;align-items:end;padding:clamp(32px,4vw,44px) clamp(24px,4vw,48px) clamp(28px,3vw,36px);box-shadow:0 18px 30px -20px rgba(0,0,0,.7)}
+.creditos-pregador{position:absolute;top:-14px;left:18%;width:14px;height:32px;background:var(--madeira);border-radius:2px;box-shadow:inset -4px 0 0 rgba(0,0,0,.18)}
+.creditos-pregador.dir{left:auto;right:18%}
+/* cada grupo centraliza rótulo e marca; as marcas nunca esticam (largura definida, altura automática) */
+.cc-grupo{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding-inline:clamp(24px,3.4vw,48px);min-width:0}
+.cc-grupo + .cc-grupo{border-left:1px solid rgba(27,23,20,.15)}
 .cc-rotulo{color:var(--cinza)}
-.marca-lei{height:72px;width:auto}
-.marca-coruja{height:96px;width:auto}
-.marca-gov{width:390px;height:auto}
+.creditos .marca,.creditos img{flex:none;height:auto;max-width:100%;object-fit:contain}
+.marca-lei{width:141px}
+.marca-coruja{width:90px}
+.marca-gov{width:390px}
 @media (max-width:760px){
-  .contracapa{flex-direction:column;align-items:flex-start;gap:22px}
-  .cc-grupo + .cc-grupo{padding-left:0;border-left:0;border-top:1px solid rgba(27,23,20,.15);padding-top:20px;width:100%}
-  .marca-gov{width:min(390px,100%)}
+  .creditos{grid-auto-flow:row;grid-template-columns:minmax(0,1fr);justify-content:stretch;padding:36px 20px 24px}
+  .cc-grupo{padding:22px 0}
+  .cc-grupo:first-of-type{padding-top:4px}
+  .cc-grupo + .cc-grupo{border-left:0;border-top:1px solid rgba(27,23,20,.15)}
+  .marca-lei{width:132px}
 }
 .rodape a{color:inherit}
 
