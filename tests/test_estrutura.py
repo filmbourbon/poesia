@@ -105,16 +105,22 @@ ok(not re.search(r'[—–]', re.sub(r'<[^>]+>', ' ', prop + p404 + html)), 'sem
 print('\nPROPOSTA CACHAÇA MATUTA (página não listada)')
 mat = open(os.path.join(RAIZ, 'parceria-matuta/index.html'), encoding='utf-8').read()
 ok('noindex, nofollow' in mat, 'Matuta com noindex, nofollow')
-ok('og-matuta.jpg' in mat and 'og:image:width" content="1200"' in mat, 'Matuta com imagem de compartilhamento própria')
+ok('og-proposta-matuta.jpg?v=3' in mat and 'Matuta + De nada em nada, tudo. | Proposta de parceria' in mat and 'og:image:width" content="1200"' in mat, 'Matuta com imagem de compartilhamento própria')
 from PIL import Image as _Im
-_o = os.path.join(RAIZ, 'assets/img/parceria-matuta/og-matuta.jpg')
-ok(_Im.open(_o).size == (1200, 630), 'og-matuta.jpg em 1200x630')
+_o = os.path.join(RAIZ, 'assets/img/parceria-matuta/og-proposta-matuta.jpg')
+ok(_Im.open(_o).size == (1200, 630), 'og-proposta-matuta.jpg em 1200x630')
 pub2 = [os.path.join(r, a) for r, _, fs in os.walk(RAIZ) if '.git' not in r and 'parceria-matuta' not in r for a in fs if a.endswith(('.html', '.xml', '.txt'))]
 ok(not any('parceria-matuta' in open(f, encoding='utf-8').read() for f in pub2), 'nenhuma página pública aponta para a proposta da Matuta')
 ok(not re.search(r'[—–]', mat + open(os.path.join(RAIZ, 'assets/js/matuta.js'), encoding='utf-8').read()), 'Matuta sem travessão')
 ok('Cabras do Sol' not in mat and 'Cabras' not in open(os.path.join(RAIZ, 'assets/js/matuta.js'), encoding='utf-8').read(), 'Matuta sem menção a Cabras do Sol')
 ok(all(m in mat for m in ['PRONAC 258413', 'Art. 18', 'Banco do Brasil', 'R$ 865.701,10']), 'dados de segurança presentes')
 ok('Aprecie com moderação' in mat, 'advertência de bebida nas peças de rede social')
+_js = open(os.path.join(RAIZ, 'assets/js/matuta.js'), encoding='utf-8').read()
+ok('VALOR_APROVADO = 865701.10' in _js and 'SALDO' in _js and 'Math.min(SALDO, Math.max(MIN' in _js, 'simulador vai até o saldo do projeto e não passa dele')
+_gal = mat[mat.index('id="m-galeria"'):mat.index('m-galeria-nota')]
+ok('lei-incentivo.png' not in _gal and 'minc-govbr.png' not in _gal, 'simulações sem misturar logos coloridos com a marca monocromática')
+ok(all(os.path.exists(os.path.join(RAIZ, 'assets/img/parceria-matuta', f)) for f in ['matuta-tinta.png', 'matuta-papel.png', 'matuta-amarelo.png']), 'versões monocromáticas da marca na paleta do projeto')
+ok('não gera' in _js.lower() or 'não entra na dedução' in _js, 'serviços Bourbon marcados como não dedutíveis')
 
 print('\n' + ('TODOS OS TESTES PASSARAM' if not falhas else f'FALHAS: {len(falhas)}'))
 sys.exit(1 if falhas else 0)
