@@ -121,6 +121,8 @@ _gal = mat[mat.index('id="m-galeria"'):mat.index('m-galeria-nota')]
 ok('lei-incentivo.png' not in _gal and 'minc-govbr.png' not in _gal, 'simulações sem misturar logos coloridos com a marca monocromática')
 ok(all(os.path.exists(os.path.join(RAIZ, 'assets/img/parceria-matuta', f)) for f in ['matuta-tinta.png', 'matuta-papel.png', 'matuta-amarelo.png']), 'versões monocromáticas da marca na paleta do projeto')
 ok('não gera' in _js.lower() or 'não entra na dedução' in _js, 'serviços Bourbon marcados como não dedutíveis')
+ok(not re.search(r'(?i)raul|lafayette', mat + _js), 'proposta Matuta sem nome pessoal, só Bourbon Films')
+ok(mat.count('65.711.903/0001-26') == 1 and _js.count('65.711.903/0001-26') == 1 and 'proponente e realizadora' not in (mat + _js).lower(), 'CNPJ conferido e sem atribuição não verificada de proponente')
 
 print('\n' + ('TODOS OS TESTES PASSARAM' if not falhas else f'FALHAS: {len(falhas)}'))
 sys.exit(1 if falhas else 0)
